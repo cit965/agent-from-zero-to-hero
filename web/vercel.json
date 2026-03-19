@@ -8,12 +8,12 @@
           "value": "learn-claude-agents.vercel.app"
         }
       ],
-      "destination": "https://learn.shareai.run/:path",
+      "destination": "https://learn.kubecit.com/:path",
       "permanent": true
     },
     {
       "source": "/",
-      "destination": "/en",
+      "destination": "/zh",
       "permanent": false
     }
   ]

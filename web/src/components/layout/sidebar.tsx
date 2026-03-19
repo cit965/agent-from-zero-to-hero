@@ -16,7 +16,7 @@ const LAYER_DOT_BG: Record<string, string> = {
 
 export function Sidebar() {
   const pathname = usePathname();
-  const locale = pathname.split("/")[1] || "en";
+  const locale = pathname.split("/")[1] || "zh";
   const t = useTranslations("sessions");
   const tLayer = useTranslations("layer_labels");
 

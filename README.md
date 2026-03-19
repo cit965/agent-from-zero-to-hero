@@ -1,136 +1,135 @@
-[English](./README.md) | [中文](./README-zh.md) | [日本語](./README-ja.md)
-# Learn Claude Code -- Harness Engineering for Real Agents
+# Learn Claude Code -- 真正的 Agent Harness 工程
 
-## The Model IS the Agent
+## 模型就是 Agent
 
-Before we talk about code, let's get one thing absolutely straight.
+在讨论代码之前，先把一件事彻底说清楚。
 
-**An agent is a model. Not a framework. Not a prompt chain. Not a drag-and-drop workflow.**
+**Agent 是模型。不是框架。不是提示词链。不是拖拽式工作流。**
 
-### What an Agent IS
+### Agent 到底是什么
 
-An agent is a neural network -- a Transformer, an RNN, a learned function -- that has been trained, through billions of gradient updates on action-sequence data, to perceive an environment, reason about goals, and take actions to achieve them. The word "agent" in AI has always meant this. Always.
+Agent 是一个神经网络 -- Transformer、RNN、一个被训练出来的函数 -- 经过数十亿次梯度更新，在行动序列数据上学会了感知环境、推理目标、采取行动。"Agent" 这个词在 AI 领域从诞生之日起就是这个意思。从来都是。
 
-A human is an agent. A biological neural network, shaped by millions of years of evolutionary training, perceiving the world through senses, reasoning through a brain, acting through a body. When DeepMind, OpenAI, or Anthropic say "agent," they mean the same thing the field has meant since its inception: **a model that has learned to act.**
+人类就是 agent。一个由数百万年进化训练出来的生物神经网络，通过感官感知世界，通过大脑推理，通过身体行动。当 DeepMind、OpenAI 或 Anthropic 说 "agent" 时，他们说的和这个领域自诞生以来就一直在说的完全一样：**一个学会了行动的模型。**
 
-The proof is written in history:
+历史已经写好了铁证：
 
-- **2013 -- DeepMind DQN plays Atari.** A single neural network, receiving only raw pixels and game scores, learned to play 7 Atari 2600 games -- surpassing all prior algorithms and beating human experts on 3 of them. By 2015, the same architecture scaled to [49 games and matched professional human testers](https://www.nature.com/articles/nature14236), published in *Nature*. No game-specific rules. No decision trees. One model, learning from experience. That model was the agent.
+- **2013 -- DeepMind DQN 玩 Atari。** 一个神经网络，只接收原始像素和游戏分数，学会了 7 款 Atari 2600 游戏 -- 超越所有先前算法，在其中 3 款上击败人类专家。到 2015 年，同一架构扩展到 [49 款游戏，达到职业人类测试员水平](https://www.nature.com/articles/nature14236)，论文发表在 *Nature*。没有游戏专属规则。没有决策树。一个模型，从经验中学习。那个模型就是 agent。
 
-- **2019 -- OpenAI Five conquers Dota 2.** Five neural networks, having played [45,000 years of Dota 2](https://openai.com/index/openai-five-defeats-dota-2-world-champions/) against themselves in 10 months, defeated **OG** -- the reigning TI8 world champions -- 2-0 on a San Francisco livestream. In a subsequent public arena, the AI won 99.4% of 42,729 games against all comers. No scripted strategies. No meta-programmed team coordination. The models learned teamwork, tactics, and real-time adaptation entirely through self-play.
+- **2019 -- OpenAI Five 征服 Dota 2。** 五个神经网络，在 10 个月内与自己对战了 [45,000 年的 Dota 2](https://openai.com/index/openai-five-defeats-dota-2-world-champions/)，在旧金山直播赛上 2-0 击败了 **OG** -- TI8 世界冠军。随后的公开竞技场中，AI 在 42,729 场比赛中胜率 99.4%。没有脚本化的策略。没有元编程的团队协调逻辑。模型完全通过自我对弈学会了团队协作、战术和实时适应。
 
-- **2019 -- DeepMind AlphaStar masters StarCraft II.** AlphaStar [beat professional players 10-1](https://deepmind.google/blog/alphastar-mastering-the-real-time-strategy-game-starcraft-ii/) in a closed-door match, and later achieved [Grandmaster status](https://www.nature.com/articles/d41586-019-03298-6) on European servers -- top 0.15% of 90,000 players. A game with imperfect information, real-time decisions, and a combinatorial action space that dwarfs chess and Go. The agent? A model. Trained. Not scripted.
+- **2019 -- DeepMind AlphaStar 制霸星际争霸 II。** AlphaStar 在闭门赛中 [10-1 击败职业选手](https://deepmind.google/blog/alphastar-mastering-the-real-time-strategy-game-starcraft-ii/)，随后在欧洲服务器上达到[宗师段位](https://www.nature.com/articles/d41586-019-03298-6) -- 90,000 名玩家中的前 0.15%。一个信息不完全、实时决策、组合动作空间远超国际象棋和围棋的游戏。Agent 是什么？是模型。训练出来的。不是编出来的。
 
-- **2019 -- Tencent Jueyu dominates Honor of Kings.** Tencent AI Lab's "Jueyu" [defeated KPL professional players](https://www.jiemian.com/article/3371171.html) in a full 5v5 match at the World Champion Cup. In 1v1 mode, pros won only [1 out of 15 games and never survived past 8 minutes](https://developer.aliyun.com/article/851058). Training intensity: one day equaled 440 human years. By 2021, Jueyu surpassed KPL pros across the full hero pool. No handcrafted matchup tables. No scripted compositions. A model that learned the entire game from scratch through self-play.
+- **2019 -- 腾讯绝悟统治王者荣耀。** 腾讯 AI Lab 的 "绝悟" 于 2019 年 8 月 2 日世冠杯半决赛上[以 5v5 击败 KPL 职业选手](https://www.jiemian.com/article/3371171.html)。在 1v1 模式下，职业选手 [15 场只赢 1 场，最多坚持不到 8 分钟](https://developer.aliyun.com/article/851058)。训练强度：一天等于人类 440 年。到 2021 年，绝悟在全英雄池 BO5 上全面超越 KPL 职业选手水准。没有手工编写的英雄克制表。没有脚本化的阵容编排。一个从零开始通过自我对弈学习整个游戏的模型。
 
-- **2024-2025 -- LLM agents reshape software engineering.** Claude, GPT, Gemini -- large language models trained on the entirety of human code and reasoning -- are deployed as coding agents. They read codebases, write implementations, debug failures, coordinate in teams. The architecture is identical to every agent before them: a trained model, placed in an environment, given tools to perceive and act. The only difference is the scale of what they've learned and the generality of the tasks they solve.
+- **2024-2025 -- LLM Agent 重塑软件工程。** Claude、GPT、Gemini -- 在人类全部代码和推理上训练的大语言模型 -- 被部署为编程 agent。它们阅读代码库，编写实现，调试故障，团队协作。架构与之前每一个 agent 完全相同：一个训练好的模型，放入一个环境，给予感知和行动的工具。唯一的不同是它们学到的东西的规模和解决任务的通用性。
 
-Every one of these milestones shares the same truth: **the "agent" is never the surrounding code. The agent is always the model.**
+每一个里程碑都共享同一个真理：**"Agent" 从来都不是外面那层代码。Agent 永远是模型本身。**
 
-### What an Agent Is NOT
+### Agent 不是什么
 
-The word "agent" has been hijacked by an entire cottage industry of prompt plumbing.
+"Agent" 这个词已经被一整个提示词水管工产业劫持了。
 
-Drag-and-drop workflow builders. No-code "AI agent" platforms. Prompt-chain orchestration libraries. They all share the same delusion: that wiring together LLM API calls with if-else branches, node graphs, and hardcoded routing logic constitutes "building an agent."
+拖拽式工作流构建器。无代码 "AI Agent" 平台。提示词链编排库。它们共享同一个幻觉：把 LLM API 调用用 if-else 分支、节点图、硬编码路由逻辑串在一起就算是 "构建 Agent" 了。
 
-It doesn't. What they build is a Rube Goldberg machine -- an over-engineered, brittle pipeline of procedural rules, with an LLM wedged in as a glorified text-completion node. That is not an agent. That is a shell script with delusions of grandeur.
+不是的。它们做出来的东西是鲁布·戈德堡机械 -- 一个过度工程化的、脆弱的过程式规则流水线，LLM 被楔在里面当一个美化了的文本补全节点。那不是 Agent。那是一个有着宏大妄想的 shell 脚本。
 
-**Prompt plumbing "agents" are the fantasy of programmers who don't train models.** They attempt to brute-force intelligence by stacking procedural logic -- massive rule trees, node graphs, chain-of-prompt waterfalls -- and praying that enough glue code will somehow emergently produce autonomous behavior. It won't. You cannot engineer your way to agency. Agency is learned, not programmed.
+**提示词水管工式 "Agent" 是不做模型的程序员的意淫。** 他们试图通过堆叠过程式逻辑来暴力模拟智能 -- 庞大的规则树、节点图、链式提示词瀑布流 -- 然后祈祷足够多的胶水代码能涌现出自主行为。不会的。你不可能通过工程手段编码出 agency。Agency 是学出来的，不是编出来的。
 
-Those systems are dead on arrival: fragile, unscalable, fundamentally incapable of generalization. They are the modern resurrection of GOFAI (Good Old-Fashioned AI) -- the symbolic rule systems the field abandoned decades ago, now spray-painted with an LLM veneer. Different packaging, same dead end.
+那些系统从诞生之日起就已经死了：脆弱、不可扩展、根本不具备泛化能力。它们是 GOFAI（Good Old-Fashioned AI，经典符号 AI）的现代还魂 -- 几十年前就被学界抛弃的符号规则系统，现在喷了一层 LLM 的漆又登场了。换了个包装，同一条死路。
 
-### The Mind Shift: From "Developing Agents" to Developing Harness
+### 心智转换：从 "开发 Agent" 到开发 Harness
 
-When someone says "I'm developing an agent," they can only mean one of two things:
+当一个人说 "我在开发 Agent" 时，他只可能是两个意思之一：
 
-**1. Training the model.** Adjusting weights through reinforcement learning, fine-tuning, RLHF, or other gradient-based methods. Collecting task-process data -- the actual sequences of perception, reasoning, and action in real domains -- and using it to shape the model's behavior. This is what DeepMind, OpenAI, Tencent AI Lab, and Anthropic do. This is agent development in the truest sense.
+**1. 训练模型。** 通过强化学习、微调、RLHF 或其他基于梯度的方法调整权重。收集任务过程数据 -- 真实领域中感知、推理、行动的实际序列 -- 用它们来塑造模型的行为。这是 DeepMind、OpenAI、腾讯 AI Lab、Anthropic 在做的事。这是最本义的 Agent 开发。
 
-**2. Building the harness.** Writing the code that gives the model an environment to operate in. This is what most of us do, and it is the focus of this repository.
+**2. 构建 Harness。** 编写代码，为模型提供一个可操作的环境。这是我们大多数人在做的事，也是本仓库的核心。
 
-A harness is everything the agent needs to function in a specific domain:
+Harness 是 agent 在特定领域工作所需要的一切：
 
 ```
 Harness = Tools + Knowledge + Observation + Action Interfaces + Permissions
 
-    Tools:          file I/O, shell, network, database, browser
-    Knowledge:      product docs, domain references, API specs, style guides
-    Observation:    git diff, error logs, browser state, sensor data
-    Action:         CLI commands, API calls, UI interactions
-    Permissions:    sandboxing, approval workflows, trust boundaries
+    Tools:          文件读写、Shell、网络、数据库、浏览器
+    Knowledge:      产品文档、领域资料、API 规范、风格指南
+    Observation:    git diff、错误日志、浏览器状态、传感器数据
+    Action:         CLI 命令、API 调用、UI 交互
+    Permissions:    沙箱隔离、审批流程、信任边界
 ```
 
-The model decides. The harness executes. The model reasons. The harness provides context. The model is the driver. The harness is the vehicle.
+模型做决策。Harness 执行。模型做推理。Harness 提供上下文。模型是驾驶者。Harness 是载具。
 
-**A coding agent's harness is its IDE, terminal, and filesystem access.** A farm agent's harness is its sensor array, irrigation controls, and weather data feeds. A hotel agent's harness is its booking system, guest communication channels, and facility management APIs. The agent -- the intelligence, the decision-maker -- is always the model. The harness changes per domain. The agent generalizes across them.
+**编程 agent 的 harness 是它的 IDE、终端和文件系统。** 农业 agent 的 harness 是传感器阵列、灌溉控制和气象数据。酒店 agent 的 harness 是预订系统、客户沟通渠道和设施管理 API。Agent -- 那个智能、那个决策者 -- 永远是模型。Harness 因领域而变。Agent 跨领域泛化。
 
-This repo teaches you to build vehicles. Vehicles for coding. But the design patterns generalize to any domain: farm management, hotel operations, manufacturing, logistics, healthcare, education, scientific research. Anywhere a task needs to be perceived, reasoned about, and acted upon -- an agent needs a harness.
+这个仓库教你造载具。编程用的载具。但设计模式可以泛化到任何领域：庄园管理、农田运营、酒店运作、工厂制造、物流调度、医疗保健、教育培训、科学研究。只要有一个任务需要被感知、推理和执行 -- agent 就需要一个 harness。
 
-### What Harness Engineers Actually Do
+### Harness 工程师到底在做什么
 
-If you are reading this repository, you are likely a harness engineer -- and that is a powerful thing to be. Here is your real job:
+如果你在读这个仓库，你很可能是一名 harness 工程师 -- 这是一个强大的身份。以下是你真正的工作：
 
-- **Implement tools.** Give the agent hands. File read/write, shell execution, API calls, browser control, database queries. Each tool is an action the agent can take in its environment. Design them to be atomic, composable, and well-described.
+- **实现工具。** 给 agent 一双手。文件读写、Shell 执行、API 调用、浏览器控制、数据库查询。每个工具都是 agent 在环境中可以采取的一个行动。设计它们时要原子化、可组合、描述清晰。
 
-- **Curate knowledge.** Give the agent domain expertise. Product documentation, architectural decision records, style guides, regulatory requirements. Load them on-demand (s05), not upfront. The agent should know what's available and pull what it needs.
+- **策划知识。** 给 agent 领域专长。产品文档、架构决策记录、风格指南、合规要求。按需加载（s05），不要前置塞入。Agent 应该知道有什么可用，然后自己拉取所需。
 
-- **Manage context.** Give the agent clean memory. Subagent isolation (s04) prevents noise from leaking. Context compression (s06) prevents history from overwhelming. Task systems (s07) persist goals beyond any single conversation.
+- **管理上下文。** 给 agent 干净的记忆。子 agent 隔离（s04）防止噪声泄露。上下文压缩（s06）防止历史淹没。任务系统（s07）让目标持久化到单次对话之外。
 
-- **Control permissions.** Give the agent boundaries. Sandbox file access. Require approval for destructive operations. Enforce trust boundaries between the agent and external systems. This is where safety engineering meets harness engineering.
+- **控制权限。** 给 agent 边界。沙箱化文件访问。对破坏性操作要求审批。在 agent 和外部系统之间实施信任边界。这是安全工程与 harness 工程的交汇点。
 
-- **Collect task-process data.** Every action sequence the agent executes in your harness is training signal. The perception-reasoning-action traces from real deployments are the raw material for fine-tuning the next generation of agent models. Your harness doesn't just serve the agent -- it can help improve the agent.
+- **收集任务过程数据。** Agent 在你的 harness 中执行的每一条行动序列都是训练信号。真实部署中的感知-推理-行动轨迹是微调下一代 agent 模型的原材料。你的 harness 不仅服务于 agent -- 它还可以帮助进化 agent。
 
-You are not writing the intelligence. You are building the world the intelligence inhabits. The quality of that world -- how clearly the agent can perceive, how precisely it can act, how rich its available knowledge is -- directly determines how effectively the intelligence can express itself.
+你不是在编写智能。你是在构建智能栖居的世界。这个世界的质量 -- agent 能看得多清楚、行动得多精准、可用知识有多丰富 -- 直接决定了智能能多有效地表达自己。
 
-**Build great harnesses. The agent will do the rest.**
+**造好 Harness。Agent 会完成剩下的。**
 
-### Why Claude Code -- A Masterclass in Harness Engineering
+### 为什么是 Claude Code -- Harness 工程的大师课
 
-Why does this repository dissect Claude Code specifically?
+为什么这个仓库专门拆解 Claude Code？
 
-Because Claude Code is the most elegant and fully-realized agent harness we have seen. Not because of any single clever trick, but because of what it *doesn't* do: it doesn't try to be the agent. It doesn't impose rigid workflows. It doesn't second-guess the model with elaborate decision trees. It provides the model with tools, knowledge, context management, and permission boundaries -- then gets out of the way.
+因为 Claude Code 是我们所见过的最优雅、最完整的 agent harness 实现。不是因为某个巧妙的技巧，而是因为它 *没做* 的事：它没有试图成为 agent 本身。它没有强加僵化的工作流。它没有用精心设计的决策树去替模型做判断。它给模型提供了工具、知识、上下文管理和权限边界 -- 然后让开了。
 
-Look at what Claude Code actually is, stripped to its essence:
+把 Claude Code 剥到本质来看：
 
 ```
-Claude Code = one agent loop
-            + tools (bash, read, write, edit, glob, grep, browser...)
-            + on-demand skill loading
-            + context compression
-            + subagent spawning
-            + task system with dependency graph
-            + team coordination with async mailboxes
-            + worktree isolation for parallel execution
-            + permission governance
+Claude Code = 一个 agent loop
+            + 工具 (bash, read, write, edit, glob, grep, browser...)
+            + 按需 skill 加载
+            + 上下文压缩
+            + 子 agent 派生
+            + 带依赖图的任务系统
+            + 异步邮箱的团队协调
+            + worktree 隔离的并行执行
+            + 权限治理
 ```
 
-That's it. That's the entire architecture. Every component is a harness mechanism -- a piece of the world built for the agent to inhabit. The agent itself? It's Claude. A model. Trained by Anthropic on the full breadth of human reasoning and code. The harness doesn't make Claude smart. Claude is already smart. The harness gives Claude hands, eyes, and a workspace.
+就这些。这就是全部架构。每一个组件都是 harness 机制 -- 为 agent 构建的栖居世界的一部分。Agent 本身呢？是 Claude。一个模型。由 Anthropic 在人类推理和代码的全部广度上训练而成。Harness 没有让 Claude 变聪明。Claude 本来就聪明。Harness 给了 Claude 双手、双眼和一个工作空间。
 
-This is why Claude Code is the ideal teaching subject: **it demonstrates what happens when you trust the model and focus your engineering on the harness.** Every session in this repository (s01-s12) reverse-engineers one harness mechanism from Claude Code's architecture. By the end, you understand not just how Claude Code works, but the universal principles of harness engineering that apply to any agent in any domain.
+这就是 Claude Code 作为教学标本的意义：**它展示了当你信任模型、把工程精力集中在 harness 上时会发生什么。** 本仓库的每一个课程（s01-s12）都在逆向工程 Claude Code 架构中的一个 harness 机制。学完之后，你理解的不只是 Claude Code 怎么工作，而是适用于任何领域、任何 agent 的 harness 工程通用原则。
 
-The lesson is not "copy Claude Code." The lesson is: **the best agent products are built by engineers who understand that their job is harness, not intelligence.**
+启示不是 "复制 Claude Code"。启示是：**最好的 agent 产品，出自那些明白自己的工作是 harness 而非 intelligence 的工程师之手。**
 
 ---
 
-## The Vision: Fill the Universe with Real Agents
+## 愿景：用真正的 Agent 铺满宇宙
 
-This is not just about coding agents.
+这不只关乎编程 agent。
 
-Every domain where humans perform complex, multi-step, judgment-intensive work is a domain where agents can operate -- given the right harness. The patterns in this repository are universal:
+每一个人类从事复杂、多步骤、需要判断力的工作的领域，都是 agent 可以运作的领域 -- 只要有对的 harness。本仓库中的模式是通用的：
 
 ```
-Estate management agent    = model + property sensors + maintenance tools + tenant comms
-Agricultural agent         = model + soil/weather data + irrigation controls + crop knowledge
-Hotel operations agent     = model + booking system + guest channels + facility APIs
-Medical research agent     = model + literature search + lab instruments + protocol docs
-Manufacturing agent        = model + production line sensors + quality controls + logistics
-Education agent            = model + curriculum knowledge + student progress + assessment tools
+庄园管理 agent  = 模型 + 物业传感器 + 维护工具 + 租户通信
+农业 agent      = 模型 + 土壤/气象数据 + 灌溉控制 + 作物知识
+酒店运营 agent  = 模型 + 预订系统 + 客户渠道 + 设施 API
+医学研究 agent  = 模型 + 文献检索 + 实验仪器 + 协议文档
+制造业 agent    = 模型 + 产线传感器 + 质量控制 + 物流系统
+教育 agent      = 模型 + 课程知识 + 学生进度 + 评估工具
 ```
 
-The loop is always the same. The tools change. The knowledge changes. The permissions change. The agent -- the model -- generalizes.
+循环永远不变。工具在变。知识在变。权限在变。Agent -- 那个模型 -- 泛化一切。
 
-Every harness engineer reading this repository is learning patterns that apply far beyond software engineering. You are learning to build the infrastructure for an intelligent, automated future. Every well-designed harness deployed in a real domain is one more place where an agent can perceive, reason, and act.
+每一个读这个仓库的 harness 工程师都在学习远超软件工程的模式。你在学习为一个智能的、自动化的未来构建基础设施。每一个部署在真实领域的好 harness，都是 agent 能够感知、推理、行动的又一个阵地。
 
-First we fill the workshops. Then the farms, the hospitals, the factories. Then the cities. Then the planet.
+先铺满工作室。然后是农田、医院、工厂。然后是城市。然后是星球。
 
 **Bash is all you need. Real agents are all the universe needs.**
 
@@ -151,43 +150,43 @@ First we fill the workshops. Then the farms, the hospitals, the factories. Then 
                     loop back -----------------> messages[]
 
 
-    That's the minimal loop. Every AI agent needs this loop.
-    The MODEL decides when to call tools and when to stop.
-    The CODE just executes what the model asks for.
-    This repo teaches you to build what surrounds this loop --
-    the harness that makes the agent effective in a specific domain.
+    这是最小循环。每个 AI Agent 都需要这个循环。
+    模型决定何时调用工具、何时停止。
+    代码只是执行模型的要求。
+    本仓库教你构建围绕这个循环的一切 --
+    让 agent 在特定领域高效工作的 harness。
 ```
 
-**12 progressive sessions, from a simple loop to isolated autonomous execution.**
-**Each session adds one harness mechanism. Each mechanism has one motto.**
+**12 个递进式课程, 从简单循环到隔离化的自治执行。**
+**每个课程添加一个 harness 机制。每个机制有一句格言。**
 
-> **s01** &nbsp; *"One loop & Bash is all you need"* &mdash; one tool + one loop = an agent
+> **s01** &nbsp; *"One loop & Bash is all you need"* &mdash; 一个工具 + 一个循环 = 一个智能体
 >
-> **s02** &nbsp; *"Adding a tool means adding one handler"* &mdash; the loop stays the same; new tools register into the dispatch map
+> **s02** &nbsp; *"加一个工具, 只加一个 handler"* &mdash; 循环不用动, 新工具注册进 dispatch map 就行
 >
-> **s03** &nbsp; *"An agent without a plan drifts"* &mdash; list the steps first, then execute; completion doubles
+> **s03** &nbsp; *"没有计划的 agent 走哪算哪"* &mdash; 先列步骤再动手, 完成率翻倍
 >
-> **s04** &nbsp; *"Break big tasks down; each subtask gets a clean context"* &mdash; subagents use independent messages[], keeping the main conversation clean
+> **s04** &nbsp; *"大任务拆小, 每个小任务干净的上下文"* &mdash; 子智能体用独立 messages[], 不污染主对话
 >
-> **s05** &nbsp; *"Load knowledge when you need it, not upfront"* &mdash; inject via tool_result, not the system prompt
+> **s05** &nbsp; *"用到什么知识, 临时加载什么知识"* &mdash; 通过 tool_result 注入, 不塞 system prompt
 >
-> **s06** &nbsp; *"Context will fill up; you need a way to make room"* &mdash; three-layer compression strategy for infinite sessions
+> **s06** &nbsp; *"上下文总会满, 要有办法腾地方"* &mdash; 三层压缩策略, 换来无限会话
 >
-> **s07** &nbsp; *"Break big goals into small tasks, order them, persist to disk"* &mdash; a file-based task graph with dependencies, laying the foundation for multi-agent collaboration
+> **s07** &nbsp; *"大目标要拆成小任务, 排好序, 记在磁盘上"* &mdash; 文件持久化的任务图, 为多 agent 协作打基础
 >
-> **s08** &nbsp; *"Run slow operations in the background; the agent keeps thinking"* &mdash; daemon threads run commands, inject notifications on completion
+> **s08** &nbsp; *"慢操作丢后台, agent 继续想下一步"* &mdash; 后台线程跑命令, 完成后注入通知
 >
-> **s09** &nbsp; *"When the task is too big for one, delegate to teammates"* &mdash; persistent teammates + async mailboxes
+> **s09** &nbsp; *"任务太大一个人干不完, 要能分给队友"* &mdash; 持久化队友 + 异步邮箱
 >
-> **s10** &nbsp; *"Teammates need shared communication rules"* &mdash; one request-response pattern drives all negotiation
+> **s10** &nbsp; *"队友之间要有统一的沟通规矩"* &mdash; 一个 request-response 模式驱动所有协商
 >
-> **s11** &nbsp; *"Teammates scan the board and claim tasks themselves"* &mdash; no need for the lead to assign each one
+> **s11** &nbsp; *"队友自己看看板, 有活就认领"* &mdash; 不需要领导逐个分配, 自组织
 >
-> **s12** &nbsp; *"Each works in its own directory, no interference"* &mdash; tasks manage goals, worktrees manage directories, bound by ID
+> **s12** &nbsp; *"各干各的目录, 互不干扰"* &mdash; 任务管目标, worktree 管目录, 按 ID 绑定
 
 ---
 
-## The Core Pattern
+## 核心模式
 
 ```python
 def agent_loop(messages):
@@ -214,140 +213,139 @@ def agent_loop(messages):
         messages.append({"role": "user", "content": results})
 ```
 
-Every session layers one harness mechanism on top of this loop -- without changing the loop itself. The loop belongs to the agent. The mechanisms belong to the harness.
+每个课程在这个循环之上叠加一个 harness 机制 -- 循环本身始终不变。循环属于 agent。机制属于 harness。
 
-## Scope (Important)
+## 范围说明 (重要)
 
-This repository is a 0->1 learning project for harness engineering -- building the environment that surrounds an agent model.
-It intentionally simplifies or omits several production mechanisms:
+本仓库是一个 0->1 的 harness 工程学习项目 -- 构建围绕 agent 模型的工作环境。
+为保证学习路径清晰，仓库有意简化或省略了部分生产机制：
 
-- Full event/hook buses (for example PreToolUse, SessionStart/End, ConfigChange).
-  s12 includes only a minimal append-only lifecycle event stream for teaching.
-- Rule-based permission governance and trust workflows
-- Session lifecycle controls (resume/fork) and advanced worktree lifecycle controls
-- Full MCP runtime details (transport/OAuth/resource subscribe/polling)
+- 完整事件 / Hook 总线 (例如 PreToolUse、SessionStart/End、ConfigChange)。
+  s12 仅提供教学用途的最小 append-only 生命周期事件流。
+- 基于规则的权限治理与信任流程
+- 会话生命周期控制 (resume/fork) 与更完整的 worktree 生命周期控制
+- 完整 MCP 运行时细节 (transport/OAuth/资源订阅/轮询)
 
-Treat the team JSONL mailbox protocol in this repo as a teaching implementation, not a claim about any specific production internals.
+仓库中的团队 JSONL 邮箱协议是教学实现，不是对任何特定生产内部实现的声明。
 
-## Quick Start
+## 快速开始
 
 ```sh
 git clone https://github.com/shareAI-lab/learn-claude-code
 cd learn-claude-code
 pip install -r requirements.txt
-cp .env.example .env   # Edit .env with your ANTHROPIC_API_KEY
+cp .env.example .env   # 编辑 .env 填入你的 ANTHROPIC_API_KEY
 
-python agents/s01_agent_loop.py       # Start here
-python agents/s12_worktree_task_isolation.py  # Full progression endpoint
-python agents/s_full.py               # Capstone: all mechanisms combined
+python agents/s01_agent_loop.py       # 从这里开始
+python agents/s12_worktree_task_isolation.py  # 完整递进终点
+python agents/s_full.py               # 总纲: 全部机制合一
 ```
 
-### Web Platform
+### Web 平台
 
-Interactive visualizations, step-through diagrams, source viewer, and documentation.
+交互式可视化、分步动画、源码查看器, 以及每个课程的文档。
 
 ```sh
 cd web && npm install && npm run dev   # http://localhost:3000
 ```
 
-## Learning Path
+## 学习路径
 
 ```
-Phase 1: THE LOOP                    Phase 2: PLANNING & KNOWLEDGE
+第一阶段: 循环                       第二阶段: 规划与知识
 ==================                   ==============================
-s01  The Agent Loop          [1]     s03  TodoWrite               [5]
-     while + stop_reason                  TodoManager + nag reminder
+s01  Agent 循环              [1]     s03  TodoWrite               [5]
+     while + stop_reason                  TodoManager + nag 提醒
      |                                    |
-     +-> s02  Tool Use            [4]     s04  Subagents            [5]
-              dispatch map: name->handler     fresh messages[] per child
+     +-> s02  Tool Use            [4]     s04  子智能体             [5]
+              dispatch map: name->handler     每个子智能体独立 messages[]
                                               |
                                          s05  Skills               [5]
-                                              SKILL.md via tool_result
+                                              SKILL.md 通过 tool_result 注入
                                               |
                                          s06  Context Compact      [5]
-                                              3-layer compression
+                                              三层上下文压缩
 
-Phase 3: PERSISTENCE                 Phase 4: TEAMS
+第三阶段: 持久化                     第四阶段: 团队
 ==================                   =====================
-s07  Tasks                   [8]     s09  Agent Teams             [9]
-     file-based CRUD + deps graph         teammates + JSONL mailboxes
+s07  任务系统                [8]     s09  智能体团队             [9]
+     文件持久化 CRUD + 依赖图             队友 + JSONL 邮箱
      |                                    |
-s08  Background Tasks        [6]     s10  Team Protocols          [12]
-     daemon threads + notify queue        shutdown + plan approval FSM
+s08  后台任务                [6]     s10  团队协议               [12]
+     守护线程 + 通知队列                  关机 + 计划审批 FSM
                                           |
-                                     s11  Autonomous Agents       [14]
-                                          idle cycle + auto-claim
+                                     s11  自治智能体             [14]
+                                          空闲轮询 + 自动认领
                                      |
-                                     s12  Worktree Isolation      [16]
-                                          task coordination + optional isolated execution lanes
+                                     s12  Worktree 隔离          [16]
+                                          任务协调 + 按需隔离执行通道
 
-                                     [N] = number of tools
+                                     [N] = 工具数量
 ```
 
-## Architecture
+## 项目结构
 
 ```
 learn-claude-code/
 |
-|-- agents/                        # Python reference implementations (s01-s12 + s_full capstone)
-|-- docs/{en,zh,ja}/               # Mental-model-first documentation (3 languages)
-|-- web/                           # Interactive learning platform (Next.js)
-|-- skills/                        # Skill files for s05
-+-- .github/workflows/ci.yml      # CI: typecheck + build
+|-- agents/                        # Python 参考实现 (s01-s12 + s_full 总纲)
+|-- docs/zh/                       # 中文文档
+|-- web/                           # 交互式学习平台 (Next.js)
+|-- skills/                        # s05 的 Skill 文件
++-- .github/workflows/ci.yml      # CI: 类型检查 + 构建
 ```
 
-## Documentation
+## 文档
 
-Mental-model-first: problem, solution, ASCII diagram, minimal code.
-Available in [English](./docs/en/) | [中文](./docs/zh/) | [日本語](./docs/ja/).
+心智模型优先: 问题、方案、ASCII 图、最小化代码。
 
-| Session | Topic | Motto |
-|---------|-------|-------|
-| [s01](./docs/en/s01-the-agent-loop.md) | The Agent Loop | *One loop & Bash is all you need* |
-| [s02](./docs/en/s02-tool-use.md) | Tool Use | *Adding a tool means adding one handler* |
-| [s03](./docs/en/s03-todo-write.md) | TodoWrite | *An agent without a plan drifts* |
-| [s04](./docs/en/s04-subagent.md) | Subagents | *Break big tasks down; each subtask gets a clean context* |
-| [s05](./docs/en/s05-skill-loading.md) | Skills | *Load knowledge when you need it, not upfront* |
-| [s06](./docs/en/s06-context-compact.md) | Context Compact | *Context will fill up; you need a way to make room* |
-| [s07](./docs/en/s07-task-system.md) | Tasks | *Break big goals into small tasks, order them, persist to disk* |
-| [s08](./docs/en/s08-background-tasks.md) | Background Tasks | *Run slow operations in the background; the agent keeps thinking* |
-| [s09](./docs/en/s09-agent-teams.md) | Agent Teams | *When the task is too big for one, delegate to teammates* |
-| [s10](./docs/en/s10-team-protocols.md) | Team Protocols | *Teammates need shared communication rules* |
-| [s11](./docs/en/s11-autonomous-agents.md) | Autonomous Agents | *Teammates scan the board and claim tasks themselves* |
-| [s12](./docs/en/s12-worktree-task-isolation.md) | Worktree + Task Isolation | *Each works in its own directory, no interference* |
+| 课程 | 主题 | 格言 |
+|------|------|------|
+| [s01](./docs/zh/s01-the-agent-loop.md) | Agent 循环 | *One loop & Bash is all you need* |
+| [s02](./docs/zh/s02-tool-use.md) | Tool Use | *加一个工具, 只加一个 handler* |
+| [s03](./docs/zh/s03-todo-write.md) | TodoWrite | *没有计划的 agent 走哪算哪* |
+| [s04](./docs/zh/s04-subagent.md) | 子智能体 | *大任务拆小, 每个小任务干净的上下文* |
+| [s05](./docs/zh/s05-skill-loading.md) | Skills | *用到什么知识, 临时加载什么知识* |
+| [s06](./docs/zh/s06-context-compact.md) | Context Compact | *上下文总会满, 要有办法腾地方* |
+| [s07](./docs/zh/s07-task-system.md) | 任务系统 | *大目标要拆成小任务, 排好序, 记在磁盘上* |
+| [s08](./docs/zh/s08-background-tasks.md) | 后台任务 | *慢操作丢后台, agent 继续想下一步* |
+| [s09](./docs/zh/s09-agent-teams.md) | 智能体团队 | *任务太大一个人干不完, 要能分给队友* |
+| [s10](./docs/zh/s10-team-protocols.md) | 团队协议 | *队友之间要有统一的沟通规矩* |
+| [s11](./docs/zh/s11-autonomous-agents.md) | 自治智能体 | *队友自己看看板, 有活就认领* |
+| [s12](./docs/zh/s12-worktree-task-isolation.md) | Worktree + 任务隔离 | *各干各的目录, 互不干扰* |
 
-## What's Next -- from understanding to shipping
+## 学完之后 -- 从理解到落地
 
-After the 12 sessions you understand how harness engineering works inside out. Two ways to put that knowledge to work:
+12 个课程走完, 你已经从内到外理解了 harness 工程的运作原理。两种方式把知识变成产品:
 
-### Kode Agent CLI -- Open-Source Coding Agent CLI
+### Kode Agent CLI -- 开源 Coding Agent CLI
 
 > `npm i -g @shareai-lab/kode`
 
-Skill & LSP support, Windows-ready, pluggable with GLM / MiniMax / DeepSeek and other open models. Install and go.
+支持 Skill & LSP, 适配 Windows, 可接 GLM / MiniMax / DeepSeek 等开放模型。装完即用。
 
 GitHub: **[shareAI-lab/Kode-cli](https://github.com/shareAI-lab/Kode-cli)**
 
-### Kode Agent SDK -- Embed Agent Capabilities in Your App
+### Kode Agent SDK -- 把 Agent 能力嵌入你的应用
 
-The official Claude Code Agent SDK communicates with a full CLI process under the hood -- each concurrent user means a separate terminal process. Kode SDK is a standalone library with no per-user process overhead, embeddable in backends, browser extensions, embedded devices, or any runtime.
+官方 Claude Code Agent SDK 底层与完整 CLI 进程通信 -- 每个并发用户 = 一个终端进程。Kode SDK 是独立库, 无 per-user 进程开销, 可嵌入后端、浏览器插件、嵌入式设备等任意运行时。
 
 GitHub: **[shareAI-lab/Kode-agent-sdk](https://github.com/shareAI-lab/Kode-agent-sdk)**
 
 ---
 
-## Sister Repo: from *on-demand sessions* to *always-on assistant*
+## 姊妹教程: 从*被动临时会话*到*主动常驻助手*
 
-The harness this repo teaches is **use-and-discard** -- open a terminal, give the agent a task, close when done, next session starts blank. That is the Claude Code model.
+本仓库教的 harness 属于 **用完即走** 型 -- 开终端、给 agent 任务、做完关掉, 下次重开是全新会话。Claude Code 就是这种模式。
 
-[OpenClaw](https://github.com/openclaw/openclaw) proved another possibility: on top of the same agent core, two harness mechanisms turn the agent from "poke it to make it move" into "it wakes up every 30 seconds to look for work":
+但 [OpenClaw](https://github.com/openclaw/openclaw) 证明了另一种可能: 在同样的 agent core 之上, 加两个 harness 机制就能让 agent 从 "踹一下动一下" 变成 "自己隔 30 秒醒一次找活干":
 
-- **Heartbeat** -- every 30s the harness sends the agent a message to check if there is anything to do. Nothing? Go back to sleep. Something? Act immediately.
-- **Cron** -- the agent can schedule its own future tasks, executed automatically when the time comes.
+- **心跳 (Heartbeat)** -- 每 30 秒 harness 给 agent 发一条消息, 让它检查有没有事可做。没事就继续睡, 有事立刻行动。
+- **定时任务 (Cron)** -- agent 可以给自己安排未来要做的事, 到点自动执行。
 
-Add multi-channel IM routing (WhatsApp / Telegram / Slack / Discord, 13+ platforms), persistent context memory, and a Soul personality system, and the agent goes from a disposable tool to an always-on personal AI assistant.
+再加上 IM 多通道路由 (WhatsApp/Telegram/Slack/Discord 等 13+ 平台)、不清空的上下文记忆、Soul 人格系统, agent 就从一个临时工具变成了始终在线的个人 AI 助手。
 
-**[claw0](https://github.com/shareAI-lab/claw0)** is our companion teaching repo that deconstructs these harness mechanisms from scratch:
+**[claw0](https://github.com/shareAI-lab/claw0)** 是我们的姊妹教学仓库, 从零拆解这些 harness 机制:
 
 ```
 claw agent = agent core + heartbeat + cron + IM chat + memory + soul
@@ -355,23 +353,17 @@ claw agent = agent core + heartbeat + cron + IM chat + memory + soul
 
 ```
 learn-claude-code                   claw0
-(agent harness core:                (proactive always-on harness:
- loop, tools, planning,              heartbeat, cron, IM channels,
- teams, worktree isolation)          memory, soul personality)
+(agent harness 内核:                 (主动式常驻 harness:
+ 循环、工具、规划、                    心跳、定时任务、IM 通道、
+ 团队、worktree 隔离)                  记忆、Soul 人格)
 ```
 
-## About
-<img width="260" src="https://github.com/user-attachments/assets/fe8b852b-97da-4061-a467-9694906b5edf" /><br>
-
-Scan with Wechat to follow us,
-or follow on X: [shareAI-Lab](https://x.com/baicai003)
-
-## License
+## 许可证
 
 MIT
 
 ---
 
-**The model is the agent. The code is the harness. Build great harnesses. The agent will do the rest.**
+**模型就是 Agent。代码是 Harness。造好 Harness，Agent 会完成剩下的。**
 
 **Bash is all you need. Real agents are all the universe needs.**

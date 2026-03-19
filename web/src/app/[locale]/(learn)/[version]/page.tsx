@@ -23,7 +23,7 @@ export default async function VersionPage({
   if (!versionData || !meta) {
     return (
       <div className="py-20 text-center">
-        <h1 className="text-2xl font-bold">Version not found</h1>
+        <h1 className="text-2xl font-bold">未找到版本</h1>
         <p className="mt-2 text-zinc-500">{version}</p>
       </div>
     );
@@ -58,7 +58,7 @@ export default async function VersionPage({
           {meta.subtitle}
         </p>
         <div className="flex flex-wrap items-center gap-4 text-sm text-zinc-500 dark:text-zinc-400">
-          <span className="font-mono">{versionData.loc} LOC</span>
+          <span className="font-mono">{versionData.loc} 行</span>
           <span>{versionData.tools.length} {t("tools")}</span>
           {meta.coreAddition && (
             <span className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-xs dark:bg-zinc-800">

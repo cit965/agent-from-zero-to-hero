@@ -81,7 +81,7 @@ export function AgentLoopSimulator({ version }: AgentLoopSimulatorProps) {
         >
           {sim.visibleSteps.length === 0 && (
             <div className="flex flex-1 items-center justify-center text-sm text-[var(--color-text-secondary)]">
-              Press Play or Step to begin
+              点击“播放”或“单步”开始
             </div>
           )}
           <AnimatePresence mode="popLayout">

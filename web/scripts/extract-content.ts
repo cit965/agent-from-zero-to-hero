@@ -99,16 +99,6 @@ function countLoc(lines: string[]): number {
   }).length;
 }
 
-// Detect locale from subdirectory path
-// docs/en/s01-the-agent-loop.md -> "en"
-// docs/zh/s01-the-agent-loop.md -> "zh"
-// docs/ja/s01-the-agent-loop.md -> "ja"
-function detectLocale(relPath: string): "en" | "zh" | "ja" {
-  if (relPath.startsWith("zh/") || relPath.startsWith("zh\\")) return "zh";
-  if (relPath.startsWith("ja/") || relPath.startsWith("ja\\")) return "ja";
-  return "en";
-}
-
 // Extract version from doc filename (e.g., "s01-the-agent-loop.md" -> "s01")
 function extractDocVersion(filename: string): string | null {
   const m = filename.match(/^(s\d+[a-c]?)-/);
@@ -215,11 +205,11 @@ function main() {
     });
   }
 
-  // 4. Read doc files from locale subdirectories (en/, zh/, ja/)
+  // 4. Read doc files from the Chinese docs directory
   const docs: DocContent[] = [];
 
   if (fs.existsSync(DOCS_DIR)) {
-    const localeDirs = ["en", "zh", "ja"];
+    const localeDirs = ["zh"];
     let totalDocFiles = 0;
 
     for (const locale of localeDirs) {
@@ -245,7 +235,7 @@ function main() {
         const titleMatch = content.match(/^#\s+(.+)$/m);
         const title = titleMatch ? titleMatch[1] : filename;
 
-        docs.push({ version, locale: locale as "en" | "zh" | "ja", title, content });
+        docs.push({ version, locale: "zh", title, content });
       }
     }
 

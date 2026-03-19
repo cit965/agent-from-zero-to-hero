@@ -69,7 +69,7 @@ export function DocRenderer({ version }: DocRendererProps) {
     if (match) return match;
     return docsData.find(
       (d: { version: string; locale: string }) =>
-        d.version === version && d.locale === "en"
+        d.version === version && d.locale === "zh"
     );
   }, [version, locale]);
 

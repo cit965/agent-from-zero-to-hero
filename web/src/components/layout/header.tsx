@@ -13,12 +13,6 @@ const NAV_ITEMS = [
   { key: "layers", href: "/layers" },
 ] as const;
 
-const LOCALES = [
-  { code: "en", label: "EN" },
-  { code: "zh", label: "中文" },
-  { code: "ja", label: "日本語" },
-];
-
 export function Header() {
   const t = useTranslations("nav");
   const pathname = usePathname();
@@ -38,11 +32,6 @@ export function Header() {
     setDark(next);
     document.documentElement.classList.toggle("dark", next);
     localStorage.setItem("theme", next ? "dark" : "light");
-  }
-
-  function switchLocale(newLocale: string) {
-    const newPath = pathname.replace(`/${locale}`, `/${newLocale}`);
-    window.location.href = newPath;
   }
 
   return (
@@ -68,25 +57,6 @@ export function Header() {
               {t(item.key)}
             </Link>
           ))}
-
-          {/* Locale switcher */}
-          <div className="flex items-center gap-1 rounded-lg border border-[var(--color-border)] p-0.5">
-            {LOCALES.map((l) => (
-              <button
-                key={l.code}
-                onClick={() => switchLocale(l.code)}
-                className={cn(
-                  "rounded-md px-2 py-1 text-xs font-medium transition-colors",
-                  locale === l.code
-                    ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900"
-                    : "text-zinc-500 hover:text-zinc-700 dark:text-zinc-400"
-                )}
-              >
-                {l.label}
-              </button>
-            ))}
-          </div>
-
           <button
             onClick={toggleDark}
             className="rounded-md p-1.5 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-white"
@@ -127,22 +97,6 @@ export function Header() {
             </Link>
           ))}
           <div className="mt-3 flex items-center justify-between border-t border-[var(--color-border)] pt-3">
-            <div className="flex gap-2">
-              {LOCALES.map((l) => (
-                <button
-                  key={l.code}
-                  onClick={() => switchLocale(l.code)}
-                  className={cn(
-                    "min-h-[44px] min-w-[44px] rounded-md px-3 text-xs font-medium",
-                    locale === l.code
-                      ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900"
-                      : "border border-[var(--color-border)]"
-                  )}
-                >
-                  {l.label}
-                </button>
-              ))}
-            </div>
             <div className="flex items-center gap-2">
               <button
                 onClick={toggleDark}

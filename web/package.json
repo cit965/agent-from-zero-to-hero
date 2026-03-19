@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "extract": "tsx scripts/extract-content.ts",
+    "extract": "node --import tsx scripts/extract-content.ts",
     "predev": "npm run extract",
     "dev": "next dev",
     "prebuild": "npm run extract",
