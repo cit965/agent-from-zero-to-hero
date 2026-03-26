@@ -14,7 +14,7 @@ const NAV_ITEMS = [
   { key: "layers", href: "/layers" },
 ] as const;
 
-const GITHUB_REPO_URL = "https://github.com/mouuii/learn-claude-code";
+const GITHUB_REPO_URL = "https://github.com/cit965/agent-from-zero-to-hero";
 
 export function Header() {
   const t = useTranslations("nav");

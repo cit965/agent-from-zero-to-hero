@@ -231,8 +231,8 @@ def agent_loop(messages):
 ## 快速开始
 
 ```sh
-git clone https://github.com/shareAI-lab/learn-claude-code
-cd learn-claude-code
+git clone https://github.com/cit965/agent-from-zero-to-hero
+cd agent-from-zero-to-hero
 pip install -r requirements.txt
 cp .env.example .env   # 编辑 .env 填入你的 ANTHROPIC_API_KEY
 
