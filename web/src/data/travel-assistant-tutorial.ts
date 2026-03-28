@@ -42,7 +42,7 @@ export const travelAssistantTutorial = {
       heading: "## <a id=\"lesson-5\"></a>第五课：构建完整的旅行规划助手应用",
     },
   ],
-  markdown: String.raw`
+  markdown: `
 # LangChain 旅行助手教程
 
 > 用一个完整的旅行规划助手，把 LangChain Agent 的核心能力串起来：模型、工具、记忆、工作流和 Web 应用。

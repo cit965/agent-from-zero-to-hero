@@ -3,18 +3,27 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations, useLocale } from "@/lib/i18n";
+import { VERSION_META } from "@/lib/constants";
 import { Github, Menu, X, Sun, Moon } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
   { key: "travel", href: "/travel-assistant" },
-  { key: "timeline", href: "/timeline" },
+  { key: "timeline", href: "/s01" },
   { key: "compare", href: "/compare" },
   { key: "layers", href: "/layers" },
 ] as const;
 
 const GITHUB_REPO_URL = "https://github.com/cit965/agent-from-zero-to-hero";
+const CLAUDE_VERSION_IDS = Object.keys(VERSION_META);
+
+function isClaudeCodeRoute(pathname: string, locale: string) {
+  return CLAUDE_VERSION_IDS.some((versionId) =>
+    pathname === `/${locale}/${versionId}` ||
+    pathname.startsWith(`/${locale}/${versionId}/`)
+  );
+}
 
 export function Header() {
   const t = useTranslations("nav");
@@ -46,20 +55,27 @@ export function Header() {
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-6 md:flex">
-          {NAV_ITEMS.map((item) => (
-            <Link
-              key={item.key}
-              href={`/${locale}${item.href}`}
-              className={cn(
-                "text-sm font-medium transition-colors hover:text-zinc-900 dark:hover:text-white",
-                pathname.includes(item.href)
-                  ? "text-zinc-900 dark:text-white"
-                  : "text-zinc-500 dark:text-zinc-400"
-              )}
-            >
-              {t(item.key)}
-            </Link>
-          ))}
+          {NAV_ITEMS.map((item) => {
+            const isActive = item.key === "timeline"
+              ? isClaudeCodeRoute(pathname, locale)
+              : pathname === `/${locale}${item.href}` ||
+                pathname.startsWith(`/${locale}${item.href}/`);
+
+            return (
+              <Link
+                key={item.key}
+                href={`/${locale}${item.href}`}
+                className={cn(
+                  "text-sm font-medium transition-colors hover:text-zinc-900 dark:hover:text-white",
+                  isActive
+                    ? "text-zinc-900 dark:text-white"
+                    : "text-zinc-500 dark:text-zinc-400"
+                )}
+              >
+                {t(item.key)}
+              </Link>
+            );
+          })}
           <button
             onClick={toggleDark}
             className="rounded-md p-1.5 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-white"

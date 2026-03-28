@@ -7,7 +7,6 @@ import { DocRenderer } from "@/components/docs/doc-renderer";
 import { SourceViewer } from "@/components/code/source-viewer";
 import { AgentLoopSimulator } from "@/components/simulator/agent-loop-simulator";
 import { ExecutionFlow } from "@/components/architecture/execution-flow";
-import { SessionVisualization } from "@/components/visualizations";
 import { Tabs } from "@/components/ui/tabs";
 import { useTranslations } from "@/lib/i18n";
 
@@ -42,9 +41,6 @@ export function VersionDetailClient({
 
   return (
     <div className="space-y-6">
-      {/* Hero Visualization */}
-      <SessionVisualization version={version} />
-
       {/* Tabbed content */}
       <Tabs tabs={tabs} defaultTab="learn">
         {(activeTab) => (

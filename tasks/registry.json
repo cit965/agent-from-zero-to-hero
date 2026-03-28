@@ -1,0 +1,160 @@
+{
+  "active_task": "tasks/remove-handcrafted-visualizations-and-unify-tutorial-layouts",
+  "last_completed_task": "tasks/add-travel-assistant-playable-simulator-example",
+  "previous_task": "tasks/add-travel-assistant-playable-simulator-example",
+  "tasks": {
+    "tasks/add-travel-assistant-playable-simulator-example": {
+      "completed_at": "2026-03-28",
+      "created_at": "2026-03-28",
+      "current_session": null,
+      "last_session": {
+        "completed_cycles": 2,
+        "floor_met": false,
+        "forced": true,
+        "policy": {
+          "check_interval_minutes": 5,
+          "min_session_minutes": 15,
+          "min_work_cycles": 3,
+          "session_floor_rule": "all"
+        },
+        "reason": "Task completed with lesson-4 integration, build verification, and generated HTML verification before the 15-minute floor elapsed",
+        "started_at": "2026-03-28T05:46:39Z",
+        "stopped_at": "2026-03-28T05:49:53Z"
+      },
+      "mode": "lean",
+      "path": "tasks/add-travel-assistant-playable-simulator-example",
+      "session_policy": {
+        "check_interval_minutes": 5,
+        "min_session_minutes": 15,
+        "min_work_cycles": 3,
+        "session_floor_rule": "all"
+      },
+      "slug": "add-travel-assistant-playable-simulator-example",
+      "status": "completed",
+      "summary_file": "tasks/add-travel-assistant-playable-simulator-example/status.md",
+      "title": "Add travel assistant playable simulator example",
+      "updated_at": "2026-03-28"
+    },
+    "tasks/fix-travel-assistant-tutorial-typography": {
+      "completed_at": "2026-03-28",
+      "created_at": "2026-03-28",
+      "current_session": null,
+      "last_session": {
+        "completed_cycles": 3,
+        "floor_met": false,
+        "forced": true,
+        "policy": {
+          "check_interval_minutes": 5,
+          "min_session_minutes": 15,
+          "min_work_cycles": 3,
+          "session_floor_rule": "all"
+        },
+        "reason": "Task completed with runtime fence verification, generated HTML verification, and successful production build before time floor elapsed",
+        "started_at": "2026-03-28T05:14:34Z",
+        "stopped_at": "2026-03-28T05:21:14Z"
+      },
+      "mode": "lean",
+      "path": "tasks/fix-travel-assistant-tutorial-typography",
+      "session_policy": {
+        "check_interval_minutes": 5,
+        "min_session_minutes": 15,
+        "min_work_cycles": 3,
+        "session_floor_rule": "all"
+      },
+      "slug": "fix-travel-assistant-tutorial-typography",
+      "status": "completed",
+      "summary_file": "tasks/fix-travel-assistant-tutorial-typography/status.md",
+      "title": "Fix travel assistant tutorial typography",
+      "updated_at": "2026-03-28"
+    },
+    "tasks/remove-handcrafted-visualizations-and-unify-tutorial-layouts": {
+      "created_at": "2026-03-28",
+      "current_session": null,
+      "last_session": {
+        "completed_cycles": 3,
+        "floor_met": true,
+        "forced": false,
+        "policy": {
+          "check_interval_minutes": 5,
+          "min_session_minutes": 15,
+          "min_work_cycles": 3,
+          "session_floor_rule": "all"
+        },
+        "reason": "",
+        "started_at": "2026-03-28T05:52:18Z",
+        "stopped_at": "2026-03-28T06:09:30Z"
+      },
+      "mode": "lean",
+      "path": "tasks/remove-handcrafted-visualizations-and-unify-tutorial-layouts",
+      "session_policy": {
+        "check_interval_minutes": 5,
+        "min_session_minutes": 15,
+        "min_work_cycles": 3,
+        "session_floor_rule": "all"
+      },
+      "slug": "remove-handcrafted-visualizations-and-unify-tutorial-layouts",
+      "status": "active",
+      "summary_file": "tasks/remove-handcrafted-visualizations-and-unify-tutorial-layouts/status.md",
+      "title": "Remove handcrafted visualizations and unify tutorial layouts",
+      "updated_at": "2026-03-28"
+    },
+    "tasks/rename-learning-path-nav-and-retire-timeline-page": {
+      "completed_at": "2026-03-28",
+      "created_at": "2026-03-28",
+      "current_session": {
+        "completed_cycles": 2,
+        "events": [
+          {
+            "at": "2026-03-28T05:36:31Z",
+            "type": "start"
+          },
+          {
+            "at": "2026-03-28T05:36:59Z",
+            "count": 1,
+            "note": "Removed dead Timeline component and unused timeline translation block after retiring the timeline page",
+            "type": "tick"
+          },
+          {
+            "at": "2026-03-28T05:38:05Z",
+            "count": 1,
+            "note": "Verified dead-code cleanup and updated handoff notes after removing Timeline component and timeline translations",
+            "type": "tick"
+          }
+        ],
+        "min_end_at": "2026-03-28T05:51:31Z",
+        "next_check_due_at": "2026-03-28T05:43:05Z",
+        "note": "",
+        "started_at": "2026-03-28T05:36:31Z",
+        "status": "running"
+      },
+      "last_session": {
+        "completed_cycles": 3,
+        "floor_met": false,
+        "forced": true,
+        "policy": {
+          "check_interval_minutes": 5,
+          "min_session_minutes": 15,
+          "min_work_cycles": 3,
+          "session_floor_rule": "all"
+        },
+        "reason": "Task completed with source updates, redirect verification in build artifacts, and successful production build before the 15-minute floor elapsed",
+        "started_at": "2026-03-28T05:30:19Z",
+        "stopped_at": "2026-03-28T05:34:46Z"
+      },
+      "mode": "lean",
+      "path": "tasks/rename-learning-path-nav-and-retire-timeline-page",
+      "session_policy": {
+        "check_interval_minutes": 5,
+        "min_session_minutes": 15,
+        "min_work_cycles": 3,
+        "session_floor_rule": "all"
+      },
+      "slug": "rename-learning-path-nav-and-retire-timeline-page",
+      "status": "completed",
+      "summary_file": "tasks/rename-learning-path-nav-and-retire-timeline-page/status.md",
+      "title": "Rename learning path nav and retire timeline page",
+      "updated_at": "2026-03-28"
+    }
+  },
+  "version": 1
+}

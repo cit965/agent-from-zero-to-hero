@@ -15,49 +15,47 @@ export default async function TravelAssistantTutorialPage({
   const tutorial = travelAssistantTutorial;
 
   return (
-    <div className="mx-auto max-w-6xl space-y-10 pb-12">
-      <section className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_280px]">
-        <div className="space-y-6">
-          <div className="inline-flex flex-wrap gap-2">
-            {tutorial.stats.map((item) => (
-              <span
-                key={item}
-                className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 dark:border-emerald-900/80 dark:bg-emerald-950/40 dark:text-emerald-300"
-              >
-                {item}
-              </span>
-            ))}
-          </div>
-
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">
-              {tutorial.title}
-            </h1>
-            <p className="mt-4 max-w-3xl text-base leading-7 text-[var(--color-text-secondary)] sm:text-lg">
-              {tutorial.subtitle}
-            </p>
-            <p className="mt-3 max-w-3xl text-sm leading-7 text-[var(--color-text-secondary)] sm:text-base">
-              {tutorial.description}
-            </p>
-          </div>
-
-          <div className="flex flex-wrap gap-3">
-            <Link
-              href={`/${locale}${getTravelLessonHref("lesson-1")}`}
-              className="inline-flex min-h-[44px] items-center rounded-lg bg-zinc-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
+    <div className="max-w-4xl space-y-10 pb-12">
+      <section className="space-y-6">
+        <div className="inline-flex flex-wrap gap-2">
+          {tutorial.stats.map((item) => (
+            <span
+              key={item}
+              className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 dark:border-emerald-900/80 dark:bg-emerald-950/40 dark:text-emerald-300"
             >
-              开始学习
-            </Link>
-            <Link
-              href="#outline"
-              className="inline-flex min-h-[44px] items-center rounded-lg border border-[var(--color-border)] px-5 py-2.5 text-sm font-medium transition-colors hover:bg-[var(--color-bg-secondary)]"
-            >
-              查看大纲
-            </Link>
-          </div>
+              {item}
+            </span>
+          ))}
         </div>
 
-        <Card className="h-fit border-emerald-200/70 bg-gradient-to-br from-emerald-50 to-cyan-50 dark:border-emerald-900/70 dark:from-emerald-950/30 dark:to-cyan-950/20">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">
+            {tutorial.title}
+          </h1>
+          <p className="mt-4 max-w-3xl text-base leading-7 text-[var(--color-text-secondary)] sm:text-lg">
+            {tutorial.subtitle}
+          </p>
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-[var(--color-text-secondary)] sm:text-base">
+            {tutorial.description}
+          </p>
+        </div>
+
+        <div className="flex flex-wrap gap-3">
+          <Link
+            href={`/${locale}${getTravelLessonHref("lesson-1")}`}
+            className="inline-flex min-h-[44px] items-center rounded-lg bg-zinc-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
+          >
+            开始学习
+          </Link>
+          <Link
+            href="#outline"
+            className="inline-flex min-h-[44px] items-center rounded-lg border border-[var(--color-border)] px-5 py-2.5 text-sm font-medium transition-colors hover:bg-[var(--color-bg-secondary)]"
+          >
+            查看大纲
+          </Link>
+        </div>
+
+        <Card className="border-emerald-200/70 bg-gradient-to-br from-emerald-50 to-cyan-50 dark:border-emerald-900/70 dark:from-emerald-950/30 dark:to-cyan-950/20">
           <div className="space-y-4">
             <div>
               <div className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-300">
@@ -98,30 +96,9 @@ export default async function TravelAssistantTutorialPage({
         ))}
       </section>
 
-      <section className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_240px]">
-        <Card className="min-w-0 p-6 sm:p-8">
-          <MarkdownArticle content={tutorial.markdown} />
-        </Card>
-
-        <div className="hidden lg:block">
-          <div className="sticky top-24 space-y-4">
-            <Card className="p-5">
-              <div className="text-sm font-semibold">单课直达</div>
-              <div className="mt-3 space-y-2 text-sm">
-                {tutorial.sections.map((section) => (
-                  <Link
-                    key={section.id}
-                    href={`/${locale}${getTravelLessonHref(section.id)}`}
-                    className="block text-[var(--color-text-secondary)] transition-colors hover:text-zinc-900 dark:hover:text-white"
-                  >
-                    {section.label} · {section.title}
-                  </Link>
-                ))}
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
+      <Card className="min-w-0 p-6 sm:p-8">
+        <MarkdownArticle content={tutorial.markdown} />
+      </Card>
     </div>
   );
 }

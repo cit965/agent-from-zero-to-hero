@@ -33,8 +33,8 @@ export function DiffPageContent({ version }: DiffPageContentProps) {
     return (
       <div className="py-12 text-center">
         <p className="text-zinc-500">Version not found.</p>
-        <Link href={`/${locale}/timeline`} className="mt-4 inline-block text-sm text-blue-600 hover:underline">
-          Back to timeline
+        <Link href={`/${locale}/s01`} className="mt-4 inline-block text-sm text-blue-600 hover:underline">
+          Back to s01
         </Link>
       </div>
     );
