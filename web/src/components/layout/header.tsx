@@ -12,7 +12,6 @@ const NAV_ITEMS = [
   { key: "travel", href: "/travel-assistant" },
   { key: "timeline", href: "/s01" },
   { key: "compare", href: "/compare" },
-  { key: "layers", href: "/layers" },
 ] as const;
 
 const GITHUB_REPO_URL = "https://github.com/cit965/agent-from-zero-to-hero";

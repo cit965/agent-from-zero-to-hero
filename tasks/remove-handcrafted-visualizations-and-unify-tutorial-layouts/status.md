@@ -20,7 +20,7 @@
 ## Snapshot
 - Task: Remove handcrafted visualizations and unify tutorial layouts
 - Updated: 2026-03-30
-- Current focus: 已补做 follow-up，移除了 Claude Code 12 节版本页的 `deep-dive / 深入探索` 页签与对应内容；等待下一次任务切换 active pointer。
+- Current focus: 已继续补做 follow-up，“架构层”已从导航和路由里一并移除，相关页面与翻译也已删除。
 
 ## Previous task context
 - Previous task folder: `tasks/add-travel-assistant-playable-simulator-example`
@@ -58,6 +58,13 @@
 - 已将旅行助手单课页外层放宽到 `max-w-6xl`，同时保留 header、学习内容和翻页导航的 `max-w-3xl` 窄版心，让源码页签单独获得更宽的代码阅读空间。
 - 已为旅行助手源码目录增加折叠开关；折叠后目录栏宽度会从约 `240px` 收缩到约 `64px`，进一步把横向空间让给源码预览区。
 - 已为旅行助手源码目录折叠增加动画：目录栏宽度使用 spring 过渡，标题与文件名淡入淡出切换，折叠按钮图标带旋转转场。
+- 已将根目录 `README.md` 从旧的单路线长文重写为“Agent 从零到一”项目说明，补充两条学习路线、仓库结构、快速开始与常用命令。
+- 已更新根目录 `AGENTS.md`，补充当前项目定位、两条教程主线、旅行助手源码目录说明，以及根文档改动的验证约定。
+- 已将 `AGENTS.md` 的项目说明部分改成中文表述，避免仓库协作文档中英混写。
+- 已修复旅行助手“源码”页签消失的问题：源码读取逻辑现在会兼容多个可能目录，并对齐当前真实存在的 lesson 文件列表。
+- 已新建 `tutorials/` 作为教程源码总目录，并将原根目录下的 `agents/`、`travel/` 分别迁移为 `tutorials/agents/`、`tutorials/travel/`。
+- 已同步更新 `README.md`、`AGENTS.md`、`docs/zh/*.md`、`web/scripts/extract-content.ts` 和旅行助手源码读取逻辑，确保新目录结构下命令、教程站点和“源码”页签都继续可用。
+- 已从顶栏导航中移除“架构层”入口，并进一步删除 `/layers` 页面及其专属翻译，避免保留死路由与死文案。
 
 ## In progress
 - 无。
@@ -86,6 +93,13 @@
 - 2026-03-30: 提权执行 `cd web && npm run build`（旅行助手源码目录视图 + 总览页瘦身 follow-up） -> 成功，通过文件目录式源码展示和教程总览页精简后的生产构建验证。
 - 2026-03-30: 提权执行 `cd web && npm run build`（旅行助手源码宽度 + 目录折叠 follow-up） -> 成功，通过 `max-w-6xl` 源码阅读宽度和可折叠目录布局后的生产构建验证。
 - 2026-03-30: `cd web && npm run build`（旅行助手源码目录折叠动画 follow-up） -> 成功，通过折叠动画增强后的生产构建验证。
+- 2026-03-30: 检查 `README.md`、`AGENTS.md` 与根目录结构 -> 文档内容已与当前“Agent 教程合集”定位对齐；本次仅修改根目录文档，未触及 `web/src` 或教程渲染逻辑，因此未额外运行 `cd web && npm run build`。
+- 2026-03-30: `cd web && npm run build`（AGENTS 中文化 + 旅行助手源码路径修复 follow-up） -> 成功，通过生产构建验证。
+- 2026-03-30: 检查 `web/.next/server/app/zh/travel-assistant/lesson-2.html` 等构建产物 -> 已包含 `学习 / 模拟 / 源码` 三个页签，确认源码标签重新出现。
+- 2026-03-30: `cd web && npm run build`（教程源码迁移到 `tutorials/` follow-up） -> 成功，内容提取已从 `tutorials/agents` 读取 12 个版本，旅行助手课时页继续生成。
+- 2026-03-30: 检查 `web/src/data/generated/docs.json` 与 `web/.next/server/app/zh/travel-assistant/lesson-2.html` -> 生成文档中的运行命令已切换到 `python tutorials/agents/...`，旅行助手课时页仍包含 `学习 / 模拟 / 源码` 三页签。
+- 2026-03-30: `cd web && npm run build`（移除顶栏“架构层”入口 follow-up） -> 成功，通过生产构建验证。
+- 2026-03-30: `cd web && npm run build`（删除 `/layers` 页面 follow-up） -> 成功，构建产物中已不再生成 `[locale]/layers` 路由。
 
 ## Decisions
 - 用“删掉 handcrafted visualization 挂载 + 保留 simulator”的方式，降低维护成本而不牺牲可播放演示。
@@ -108,6 +122,10 @@
 - 当源码页签引入文件目录后，代码区会因 `max-w-3xl` 外层和目录栏宽度而变窄；现在已通过“页宽放大 + 目录可折叠”两步一起缓解。
 - 文件目录现在不仅能折叠，而且有明显的过渡反馈，不再是生硬地瞬间收起。
 - 本任务验证基线仍是 `cd web && npm run build`，并已通过。
+- 根目录 README 和 AGENTS 现在都已与项目现状对齐，不再继续沿用“只讲 Learn Claude Code”的旧叙事。
+- 旅行助手源码目录当前不应假设只有单一路径；后续若用户再次移动源码目录，优先扩展候选路径而不是直接删掉“源码”页签。
+- 当前教程源码的推荐根目录是 `tutorials/`；后续如果继续新增第三条教程路线，优先也放到这个目录下，避免再次把源码散落在仓库根目录。
+- “架构层”这条线已经彻底下线；后续如无特殊需要，不再恢复该导航项或单独页面。
 
 ## Next session start here
 - 先读 `AGENTS.md` 和 `tasks/registry.json`，再决定是否需要用 `$long-task-dev` 新开任务。

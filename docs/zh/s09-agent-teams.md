@@ -117,7 +117,7 @@ def _teammate_loop(self, name, role, prompt):
 
 ```sh
 cd learn-claude-code
-python agents/s09_agent_teams.py
+python tutorials/agents/s09_agent_teams.py
 ```
 
 试试这些 prompt (英文 prompt 对 LLM 效果更好, 也可以用中文):

@@ -132,7 +132,7 @@ if len(messages) <= 3:
 
 ```sh
 cd learn-claude-code
-python agents/s11_autonomous_agents.py
+python tutorials/agents/s11_autonomous_agents.py
 ```
 
 试试这些 prompt (英文 prompt 对 LLM 效果更好, 也可以用中文):

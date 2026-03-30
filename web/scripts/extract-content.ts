@@ -11,7 +11,7 @@ import { VERSION_META, VERSION_ORDER, LEARNING_PATH } from "../src/lib/constants
 // Resolve paths relative to this script's location (web/scripts/)
 const WEB_DIR = path.resolve(__dirname, "..");
 const REPO_ROOT = path.resolve(WEB_DIR, "..");
-const AGENTS_DIR = path.join(REPO_ROOT, "agents");
+const AGENTS_DIR = path.join(REPO_ROOT, "tutorials", "agents");
 const DOCS_DIR = path.join(REPO_ROOT, "docs");
 const OUT_DIR = path.join(WEB_DIR, "src", "data", "generated");
 

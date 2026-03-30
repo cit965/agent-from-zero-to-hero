@@ -107,7 +107,7 @@ def agent_loop(query):
 
 ```sh
 cd learn-claude-code
-python agents/s01_agent_loop.py
+python tutorials/agents/s01_agent_loop.py
 ```
 
 试试这些 prompt (英文 prompt 对 LLM 效果更好, 也可以用中文):

@@ -1,0 +1,5 @@
+langchain
+langchain-community
+langgraph
+zhipuai
+langchain-openai

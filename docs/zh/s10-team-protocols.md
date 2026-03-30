@@ -96,7 +96,7 @@ def handle_plan_review(request_id, approve, feedback=""):
 
 ```sh
 cd learn-claude-code
-python agents/s10_team_protocols.py
+python tutorials/agents/s10_team_protocols.py
 ```
 
 试试这些 prompt (英文 prompt 对 LLM 效果更好, 也可以用中文):

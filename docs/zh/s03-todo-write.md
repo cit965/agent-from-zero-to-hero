@@ -88,7 +88,7 @@ if rounds_since_todo >= 3 and messages:
 
 ```sh
 cd learn-claude-code
-python agents/s03_todo_write.py
+python tutorials/agents/s03_todo_write.py
 ```
 
 试试这些 prompt (英文 prompt 对 LLM 效果更好, 也可以用中文):

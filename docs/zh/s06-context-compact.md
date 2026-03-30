@@ -117,11 +117,11 @@ def agent_loop(messages: list):
 
 ```sh
 cd learn-claude-code
-python agents/s06_context_compact.py
+python tutorials/agents/s06_context_compact.py
 ```
 
 试试这些 prompt (英文 prompt 对 LLM 效果更好, 也可以用中文):
 
-1. `Read every Python file in the agents/ directory one by one` (观察 micro-compact 替换旧结果)
+1. `Read every Python file in the tutorials/agents/ directory one by one` (观察 micro-compact 替换旧结果)
 2. `Keep reading files until compression triggers automatically`
 3. `Use the compact tool to manually compress the conversation`

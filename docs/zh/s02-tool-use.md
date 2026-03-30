@@ -90,7 +90,7 @@ for block in response.content:
 
 ```sh
 cd learn-claude-code
-python agents/s02_tool_use.py
+python tutorials/agents/s02_tool_use.py
 ```
 
 试试这些 prompt (英文 prompt 对 LLM 效果更好, 也可以用中文):

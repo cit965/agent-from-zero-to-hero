@@ -86,7 +86,7 @@ def run_subagent(prompt: str) -> str:
 
 ```sh
 cd learn-claude-code
-python agents/s04_subagent.py
+python tutorials/agents/s04_subagent.py
 ```
 
 试试这些 prompt (英文 prompt 对 LLM 效果更好, 也可以用中文):

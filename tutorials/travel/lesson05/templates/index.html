@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖 旅行规划助手</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 旅行规划助手</h1>
+            <p>基于 LangChain Agent 的智能旅行规划</p>
+        </header>
+        
+        <div class="chat-container">
+            <div class="messages" id="messages">
+                <div class="message agent">
+                    <div class="avatar">🤖</div>
+                    <div class="content">
+                        你好！我是旅行规划助手，可以帮你：
+                        <ul>
+                            <li>查询城市天气</li>
+                            <li>推荐热门景点</li>
+                            <li>估算交通时间</li>
+                            <li>推荐住宿酒店</li>
+                            <li>制定完整旅行计划</li>
+                        </ul>
+                        请问有什么可以帮助你的？
+                    </div>
+                </div>
+            </div>
+            
+            <div class="input-area">
+                <input type="text" id="user-input" placeholder="输入你的问题，例如：北京天气怎么样？" 
+                       onkeypress="if(event.key==='Enter') sendMessage()">
+                <button onclick="sendMessage()" id="send-btn">发送</button>
+                <button onclick="newChat()" class="new-chat-btn">新对话</button>
+            </div>
+        </div>
+        
+        <div class="tool-calls" id="tool-calls" style="display: none;">
+            <h3>🔧 工具调用记录</h3>
+            <div id="tool-calls-content"></div>
+        </div>
+    </div>
+
+    <script>
+        let threadId = null;
+        
+        function addMessage(role, content) {
+            const messagesDiv = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role}`;
+            
+            const avatar = role === 'user' ? '👤' : '🤖';
+            
+            // 简单的 Markdown 转换
+            let formattedContent = content
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\n/g, '<br>')
+                .replace(/## (.*?)(<br>|$)/g, '<h3>$1</h3>')
+                .replace(/- (.*?)(<br>|$)/g, '<li>$1</li>');
+            
+            messageDiv.innerHTML = `
+                <div class="avatar">${avatar}</div>
+                <div class="content">${formattedContent}</div>
+            `;
+            
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        function showToolCalls(toolCalls) {
+            if (toolCalls && toolCalls.length > 0) {
+                const toolCallsDiv = document.getElementById('tool-calls');
+                const contentDiv = document.getElementById('tool-calls-content');
+                
+                contentDiv.innerHTML = toolCalls.map(tc => 
+                    `<div class="tool-call">
+                        <span class="tool-name">[${tc.tool}]</span>
+                        <span class="tool-result">${tc.result}</span>
+                    </div>`
+                ).join('');
+                
+                toolCallsDiv.style.display = 'block';
+            }
+        }
+        
+        async function sendMessage() {
+            const input = document.getElementById('user-input');
+            const sendBtn = document.getElementById('send-btn');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // 显示用户消息
+            addMessage('user', message);
+            input.value = '';
+            
+            // 显示加载状态
+            sendBtn.disabled = true;
+            sendBtn.textContent = '思考中...';
+            
+            try {
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        message: message,
+                        thread_id: threadId
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.error) {
+                    addMessage('agent', `❌ 错误: ${data.error}`);
+                } else {
+                    threadId = data.thread_id;
+                    addMessage('agent', data.response);
+                    showToolCalls(data.tool_calls);
+                }
+            } catch (error) {
+                addMessage('agent', `❌ 网络错误: ${error.message}`);
+            } finally {
+                sendBtn.disabled = false;
+                sendBtn.textContent = '发送';
+            }
+        }
+        
+        async function newChat() {
+            threadId = null;
+            document.getElementById('messages').innerHTML = `
+                <div class="message agent">
+                    <div class="avatar">🤖</div>
+                    <div class="content">
+                        新对话已创建！请问有什么可以帮助你的？
+                    </div>
+                </div>
+            `;
+            document.getElementById('tool-calls').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
