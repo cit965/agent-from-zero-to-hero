@@ -27,7 +27,7 @@ SENIVERSE_API_URL = "https://api.seniverse.com/v3/weather/now.json"
 # 创建 LLM
 llm = ChatOpenAI(
     temperature=0.7,
-    model="glm-4.7",
+    model="glm-5.1",
     openai_api_key=ZHIPU_API_KEY,
     openai_api_base="https://open.bigmodel.cn/api/paas/v4/"
 )

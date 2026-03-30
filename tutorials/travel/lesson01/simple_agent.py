@@ -1,6 +1,6 @@
 """
 最简单的 LangChain Agent Demo
-使用智谱 GLM-4 作为 LLM
+使用智谱 GLM-5.1 作为 LLM
 """
 
 import os
@@ -40,7 +40,7 @@ agent = create_agent(llm, tools)
 # 6. 运行 Agent
 if __name__ == "__main__":
     print("=" * 50)
-    print("LangChain Agent Demo - 使用智谱 GLM-4")
+    print("LangChain Agent Demo - 使用智谱 GLM-5.1")
     print("=" * 50)
     
     # 测试问题

@@ -193,7 +193,7 @@ SENIVERSE_UID = "Pc9Fuy4ms9vV1btnZ"
 SENIVERSE_KEY = "S4KHevvOhFIYayLbu"
 
 # 创建 LLM
-llm = ChatZhipuAI(model="glm-4", api_key=ZHIPU_API_KEY, temperature=0.7)
+llm = ChatZhipuAI(model="glm-5.1", api_key=ZHIPU_API_KEY, temperature=0.7)
 
 
 @tool

@@ -110,7 +110,7 @@ def create_agent():
     
     llm = ChatOpenAI(
         temperature=0.7,
-        model="glm-4.7",
+        model="glm-5.1",
         openai_api_key=zhipu_api_key,
         openai_api_base="https://open.bigmodel.cn/api/paas/v4/"
     )

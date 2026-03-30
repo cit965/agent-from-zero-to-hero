@@ -170,7 +170,7 @@ SENIVERSE_KEY = "你的私钥"
 SENIVERSE_API_URL = "https://api.seniverse.com/v3/weather/now.json"
 
 # 创建 LLM
-llm = ChatZhipuAI(model="glm-4", api_key=ZHIPU_API_KEY, temperature=0.7)
+llm = ChatZhipuAI(model="glm-5.1", api_key=ZHIPU_API_KEY, temperature=0.7)
 
 # 定义工具
 @tool

@@ -7,7 +7,7 @@ export const travelAssistantTutorial = {
   stats: [
     "5 节课程",
     "LangChain + LangGraph",
-    "智谱 GLM-4.7",
+    "智谱 GLM-5.1",
     "Flask Web 应用",
   ],
   sections: [
@@ -103,7 +103,7 @@ from langchain.agents import create_agent
 
 llm = ChatOpenAI(
     temperature=0.6,
-    model="glm-4.7",
+    model="glm-5.1",
     openai_api_key=os.getenv("ZHIPU_API_KEY"),
     openai_api_base="https://open.bigmodel.cn/api/paas/v4/",
 )
@@ -135,7 +135,7 @@ agent = create_agent(llm, tools)
 \`\`\`python
 if __name__ == "__main__":
     print("=" * 50)
-    print("LangChain Agent Demo - 使用智谱 GLM-4")
+    print("LangChain Agent Demo - 使用智谱 GLM-5.1")
     print("=" * 50)
 
     question = "用 add 工具计算 3+5，再用 multiply 工具把结果乘以 2"
@@ -620,7 +620,7 @@ def estimate_travel_time(from_city: str, to_city: str) -> str:
 def create_travel_agent():
     llm = ChatOpenAI(
         temperature=0.7,
-        model="glm-4.7",
+        model="glm-5.1",
         openai_api_key=os.getenv("ZHIPU_API_KEY"),
         openai_api_base="https://open.bigmodel.cn/api/paas/v4/",
     )

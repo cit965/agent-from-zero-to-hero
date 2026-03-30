@@ -99,7 +99,7 @@ def search_attractions(city: str) -> str:
 
 # 创建 Agent
 def create_agent():
-    llm = ChatZhipuAI(model="glm-4", api_key=os.getenv("ZHIPU_API_KEY"))
+    llm = ChatZhipuAI(model="glm-5.1", api_key=os.getenv("ZHIPU_API_KEY"))
     memory = MemorySaver()
     return create_react_agent(llm, tools, checkpointer=memory)
 ```
@@ -224,4 +224,3 @@ cd course/lesson05
 - ✅ 第五课：构建完整应用
 
 **下一步建议**：
-
