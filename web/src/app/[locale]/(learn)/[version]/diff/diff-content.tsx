@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import Link from "next/link";
-import { useLocale } from "@/lib/i18n";
+import { useLocale, useTranslations } from "@/lib/i18n";
 import { VERSION_META } from "@/lib/constants";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { LayerBadge } from "@/components/ui/badge";
@@ -19,6 +19,7 @@ interface DiffPageContentProps {
 
 export function DiffPageContent({ version }: DiffPageContentProps) {
   const locale = useLocale();
+  const tSession = useTranslations("sessions");
   const meta = VERSION_META[version];
 
   const { currentVersion, prevVersion, diff } = useMemo(() => {
@@ -34,7 +35,7 @@ export function DiffPageContent({ version }: DiffPageContentProps) {
       <div className="py-12 text-center">
         <p className="text-zinc-500">Version not found.</p>
         <Link href={`/${locale}/s01`} className="mt-4 inline-block text-sm text-blue-600 hover:underline">
-          Back to s01
+          Back to {tSession("s01") || VERSION_META.s01.title}
         </Link>
       </div>
     );
@@ -76,7 +77,7 @@ export function DiffPageContent({ version }: DiffPageContentProps) {
           {prevMeta?.title || prevVersion.id} → {meta.title}
         </h1>
         <p className="mt-2 text-zinc-500 dark:text-zinc-400">
-          {prevVersion.id} ({prevVersion.loc} LOC) → {version} ({currentVersion.loc} LOC)
+          {(tSession(prevVersion.id) || prevMeta?.title || prevVersion.id)} ({prevVersion.loc} LOC) → {(tSession(version) || meta.title)} ({currentVersion.loc} LOC)
         </p>
       </div>
 
@@ -193,8 +194,8 @@ export function DiffPageContent({ version }: DiffPageContentProps) {
         <CodeDiff
           oldSource={prevVersion.source}
           newSource={currentVersion.source}
-          oldLabel={`${prevVersion.id} (${prevVersion.filename})`}
-          newLabel={`${version} (${currentVersion.filename})`}
+          oldLabel={`${tSession(prevVersion.id) || prevMeta?.title || prevVersion.id} (${prevVersion.filename})`}
+          newLabel={`${tSession(version) || meta.title} (${currentVersion.filename})`}
         />
       </div>
     </div>

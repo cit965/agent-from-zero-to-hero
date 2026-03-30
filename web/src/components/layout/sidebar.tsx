@@ -51,8 +51,7 @@ export function Sidebar() {
                           : "text-zinc-500 hover:bg-zinc-50 hover:text-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-800/50 dark:hover:text-zinc-300"
                       )}
                     >
-                      <span className="font-mono text-xs">{vId}</span>
-                      <span className="ml-1.5">{t(vId) || meta?.title}</span>
+                      <span>{t(vId) || meta?.title}</span>
                     </Link>
                   </li>
                 );

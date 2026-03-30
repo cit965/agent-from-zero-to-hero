@@ -20,26 +20,26 @@ export const travelAssistantTutorial = {
     {
       id: "lesson-2",
       label: "第二课",
-      title: "为 Agent 添加真实 API 工具",
-      heading: "## <a id=\"lesson-2\"></a>第二课：为 Agent 添加真实 API 工具",
+      title: "添加真实工具",
+      heading: "## <a id=\"lesson-2\"></a>第二课：添加真实工具",
     },
     {
       id: "lesson-3",
       label: "第三课",
-      title: "Agent 记忆与多轮对话",
-      heading: "## <a id=\"lesson-3\"></a>第三课：Agent 记忆与多轮对话",
+      title: "记忆与多轮对话",
+      heading: "## <a id=\"lesson-3\"></a>第三课：记忆与多轮对话",
     },
     {
       id: "lesson-4",
       label: "第四课",
-      title: "Agent 工作流与复杂任务",
-      heading: "## <a id=\"lesson-4\"></a>第四课：Agent 工作流与复杂任务",
+      title: "工作流与复杂任务",
+      heading: "## <a id=\"lesson-4\"></a>第四课：工作流与复杂任务",
     },
     {
       id: "lesson-5",
       label: "第五课",
-      title: "构建完整的旅行规划助手应用",
-      heading: "## <a id=\"lesson-5\"></a>第五课：构建完整的旅行规划助手应用",
+      title: "完整旅行助手",
+      heading: "## <a id=\"lesson-5\"></a>第五课：完整旅行助手",
     },
   ],
   markdown: `
@@ -174,7 +174,7 @@ Agent 会自动完成这条链路：
 
 ---
 
-## <a id="lesson-2"></a>第二课：为 Agent 添加真实 API 工具
+## <a id="lesson-2"></a>第二课：添加真实工具
 
 第一课里的工具都是本地函数。真实应用里，Agent 往往需要调用外部 API。这里用心知天气 API 做一个真实工具。
 
@@ -274,7 +274,7 @@ Agent 会自主决定：
 
 ---
 
-## <a id="lesson-3"></a>第三课：Agent 记忆与多轮对话
+## <a id="lesson-3"></a>第三课：记忆与多轮对话
 
 如果没有记忆，Agent 每一轮都是孤立的。用户说“那上海呢？”时，模型可能根本不知道你还在问天气。
 
@@ -334,7 +334,7 @@ agent.invoke(
 \`\`\`python
 if __name__ == "__main__":
     print("=" * 60)
-    print("第三课：Agent 记忆与多轮对话")
+    print("第三课：记忆与多轮对话")
     print("=" * 60)
 
     config = {"configurable": {"thread_id": "demo-conversation"}}
@@ -386,7 +386,7 @@ with PostgresSaver.from_conn_string(DB_URI) as checkpointer:
 
 ---
 
-## <a id="lesson-4"></a>第四课：Agent 工作流与复杂任务
+## <a id="lesson-4"></a>第四课：工作流与复杂任务
 
 旅行规划通常不是一个工具就能解决的。它本质上是多步骤任务。
 
@@ -496,7 +496,7 @@ print(result["messages"][-1].content)
 
 ---
 
-## <a id="lesson-5"></a>第五课：构建完整的旅行规划助手应用
+## <a id="lesson-5"></a>第五课：完整旅行助手
 
 前四课已经完成了核心能力。现在把它打包成一个完整的 Web 应用。
 
@@ -762,8 +762,6 @@ http://localhost:8080
 - 能实现多轮记忆对话
 - 能把复杂需求拆成多工具工作流
 - 能把 Agent 封装成完整 Web 应用
-
-这个教程和 Claude Code 那条路线不一样。前者偏 **Agent 产品开发**，后者偏 **Coding Agent 架构拆解**。放在同一个站点里，正好能形成两条互补的学习路径。
 `,
 } as const;
 
@@ -804,4 +802,11 @@ export function getTravelLesson(lessonId: string) {
 
 export function getTravelLessonHref(lessonId: string) {
   return `/${travelAssistantTutorial.slug}/${lessonId}`;
+}
+
+export function getTravelLessonDisplayTitle(lesson: {
+  label: string;
+  title: string;
+}) {
+  return `${lesson.label}：${lesson.title}`;
 }

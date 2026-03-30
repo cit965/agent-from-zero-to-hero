@@ -33,6 +33,10 @@ export default async function VersionPage({
   const tSession = getTranslations(locale, "sessions");
   const tLayer = getTranslations(locale, "layer_labels");
   const layer = LAYERS.find((l) => l.id === meta.layer);
+  const sessionLabel = tSession(version) || meta.title;
+  const lessonTag = sessionLabel.includes("：")
+    ? sessionLabel.split("：")[0]
+    : sessionLabel;
 
   const pathIndex = LEARNING_PATH.indexOf(version as typeof LEARNING_PATH[number]);
   const prevVersion = pathIndex > 0 ? LEARNING_PATH[pathIndex - 1] : null;
@@ -46,10 +50,10 @@ export default async function VersionPage({
       {/* Header */}
       <header className="space-y-3">
         <div className="flex flex-wrap items-center gap-3">
-          <span className="rounded-lg bg-zinc-100 px-3 py-1 font-mono text-lg font-bold dark:bg-zinc-800">
-            {version}
+          <span className="rounded-full bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
+            {lessonTag}
           </span>
-          <h1 className="text-2xl font-bold sm:text-3xl">{tSession(version) || meta.title}</h1>
+          <h1 className="text-2xl font-bold sm:text-3xl">{meta.title}</h1>
           {layer && (
             <LayerBadge layer={meta.layer}>{tLayer(layer.id)}</LayerBadge>
           )}
@@ -94,7 +98,7 @@ export default async function VersionPage({
             <div>
               <div className="text-xs text-zinc-400">{t("prev")}</div>
               <div className="font-medium">
-                {prevVersion} - {tSession(prevVersion) || VERSION_META[prevVersion]?.title}
+                {tSession(prevVersion) || VERSION_META[prevVersion]?.title}
               </div>
             </div>
           </Link>
@@ -109,7 +113,7 @@ export default async function VersionPage({
             <div>
               <div className="text-xs text-zinc-400">{t("next")}</div>
               <div className="font-medium">
-                {tSession(nextVersion) || VERSION_META[nextVersion]?.title} - {nextVersion}
+                {tSession(nextVersion) || VERSION_META[nextVersion]?.title}
               </div>
             </div>
             <span className="transition-transform group-hover:translate-x-1">

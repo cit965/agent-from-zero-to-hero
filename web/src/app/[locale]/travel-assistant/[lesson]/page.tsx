@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Card } from "@/components/ui/card";
-import { MarkdownArticle } from "@/components/docs/markdown-article";
-import { TravelAgentSimulator } from "@/components/travel/travel-agent-simulator";
+import { TravelLessonDetail } from "@/components/travel/travel-lesson-detail";
+import { getTravelLessonScreenshots } from "@/data/travel-assistant-assets";
 import { getTravelAssistantLessonScenario } from "@/data/travel-assistant-scenarios";
+import { getTravelLessonSourceFiles } from "@/data/travel-assistant-source";
 import {
   getTravelLesson,
+  getTravelLessonDisplayTitle,
   getTravelLessonHref,
   travelAssistantLessons,
   travelAssistantTutorial,
@@ -34,76 +35,100 @@ export default async function TravelAssistantLessonPage({
       ? travelAssistantLessons[lessonIndex + 1]
       : null;
   const lessonScenario = getTravelAssistantLessonScenario(currentLesson.id);
+  const sourceFiles = await getTravelLessonSourceFiles(currentLesson.id);
+  const screenshots = getTravelLessonScreenshots(currentLesson.id);
 
   return (
-    <div className="max-w-4xl space-y-8 pb-12">
-      <section className="space-y-5">
-        <Link
-          href={`/${locale}/travel-assistant`}
-          className="inline-flex items-center text-sm font-medium text-emerald-700 transition-colors hover:text-emerald-900 dark:text-emerald-300 dark:hover:text-emerald-200"
-        >
-          ← 返回教程总览
-        </Link>
-
-        <div className="inline-flex rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 dark:border-emerald-900/80 dark:bg-emerald-950/40 dark:text-emerald-300">
-          {currentLesson.label}
-        </div>
-
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            {currentLesson.title}
-          </h1>
-          <p className="mt-3 max-w-3xl text-base leading-7 text-[var(--color-text-secondary)]">
-            {travelAssistantTutorial.subtitle}
-          </p>
-        </div>
-      </section>
-
-      {lessonScenario && (
-        <Card className="p-6 sm:p-8">
-          <TravelAgentSimulator scenario={lessonScenario} />
-        </Card>
-      )}
-
-      <Card className="p-6 sm:p-8">
-        <MarkdownArticle content={currentLesson.markdown} />
-      </Card>
-
-      <nav className="grid gap-4 border-t border-[var(--color-border)] pt-6 sm:grid-cols-2">
-        {prevLesson ? (
-          <Link
-            href={`/${locale}${getTravelLessonHref(prevLesson.id)}`}
-            className="rounded-xl border border-[var(--color-border)] p-4 transition-colors hover:bg-[var(--color-bg-secondary)]"
-          >
-            <div className="text-xs text-[var(--color-text-secondary)]">上一课</div>
-            <div className="mt-1 font-semibold">
-              {prevLesson.label} · {prevLesson.title}
-            </div>
-          </Link>
-        ) : (
-          <div />
-        )}
-
-        {nextLesson ? (
-          <Link
-            href={`/${locale}${getTravelLessonHref(nextLesson.id)}`}
-            className="rounded-xl border border-[var(--color-border)] p-4 text-right transition-colors hover:bg-[var(--color-bg-secondary)]"
-          >
-            <div className="text-xs text-[var(--color-text-secondary)]">下一课</div>
-            <div className="mt-1 font-semibold">
-              {nextLesson.label} · {nextLesson.title}
-            </div>
-          </Link>
-        ) : (
+    <div className="mx-auto max-w-6xl space-y-10 py-4">
+      <div className="max-w-3xl">
+        <header className="space-y-3">
           <Link
             href={`/${locale}/travel-assistant`}
-            className="rounded-xl border border-[var(--color-border)] p-4 text-right transition-colors hover:bg-[var(--color-bg-secondary)]"
+            className="inline-flex items-center text-sm text-zinc-500 transition-colors hover:text-zinc-900 dark:hover:text-white"
           >
-            <div className="text-xs text-[var(--color-text-secondary)]">完成课程</div>
-            <div className="mt-1 font-semibold">返回教程总览</div>
+            ← 返回教程总览
           </Link>
-        )}
-      </nav>
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="rounded-full bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
+              {currentLesson.label}
+            </span>
+            <h1 className="text-2xl font-bold sm:text-3xl">
+              {currentLesson.title}
+            </h1>
+          </div>
+          <p className="text-lg text-zinc-500 dark:text-zinc-400">
+            {travelAssistantTutorial.subtitle}
+          </p>
+          <div className="flex flex-wrap items-center gap-4 text-sm text-zinc-500 dark:text-zinc-400">
+            <span>{travelAssistantTutorial.title}</span>
+            <span>{travelAssistantTutorial.stats[1]}</span>
+            <span>{travelAssistantTutorial.stats[3]}</span>
+          </div>
+          <blockquote className="border-l-4 border-zinc-300 pl-4 text-sm italic text-zinc-500 dark:border-zinc-600 dark:text-zinc-400">
+            这一课会把旅行助手往完整产品再推进一步，同时保留可运行、可验证的最小实现。
+          </blockquote>
+        </header>
+      </div>
+
+      <TravelLessonDetail
+        markdown={currentLesson.markdown}
+        scenario={lessonScenario}
+        sourceFiles={sourceFiles}
+        screenshots={screenshots}
+      />
+
+      <div className="max-w-3xl">
+        <nav className="flex items-center justify-between border-t border-zinc-200 pt-6 dark:border-zinc-700">
+          {prevLesson ? (
+            <Link
+              href={`/${locale}${getTravelLessonHref(prevLesson.id)}`}
+              className="group flex items-center gap-2 text-sm text-zinc-500 transition-colors hover:text-zinc-900 dark:hover:text-white"
+            >
+              <span className="transition-transform group-hover:-translate-x-1">
+                &larr;
+              </span>
+              <div>
+                <div className="text-xs text-zinc-400">上一课</div>
+                <div className="font-medium">
+                  {getTravelLessonDisplayTitle(prevLesson)}
+                </div>
+              </div>
+            </Link>
+          ) : (
+            <div />
+          )}
+
+          {nextLesson ? (
+            <Link
+              href={`/${locale}${getTravelLessonHref(nextLesson.id)}`}
+              className="group flex items-center gap-2 text-right text-sm text-zinc-500 transition-colors hover:text-zinc-900 dark:hover:text-white"
+            >
+              <div>
+                <div className="text-xs text-zinc-400">下一课</div>
+                <div className="font-medium">
+                  {getTravelLessonDisplayTitle(nextLesson)}
+                </div>
+              </div>
+              <span className="transition-transform group-hover:translate-x-1">
+                &rarr;
+              </span>
+            </Link>
+          ) : (
+            <Link
+              href={`/${locale}/travel-assistant`}
+              className="group flex items-center gap-2 text-right text-sm text-zinc-500 transition-colors hover:text-zinc-900 dark:hover:text-white"
+            >
+              <div>
+                <div className="text-xs text-zinc-400">完成课程</div>
+                <div className="font-medium">返回教程总览</div>
+              </div>
+              <span className="transition-transform group-hover:translate-x-1">
+                &rarr;
+              </span>
+            </Link>
+          )}
+        </nav>
+      </div>
     </div>
   );
 }

@@ -1,8 +1,8 @@
 {
   "meta": { "title": "Agent 从小白到架构师", "description": "从 0 到 1 构建 nano Claude Code-like agent，每次只加一个机制" },
-  "nav": { "home": "首页", "travel": "旅行助手", "timeline": "手搓 Claude Code", "compare": "版本对比", "layers": "架构层", "github": "GitHub" },
+  "nav": { "home": "首页", "travel": "LangChain旅行助手", "timeline": "手搓 Claude Code", "compare": "版本对比", "layers": "架构层", "github": "GitHub" },
   "home": { "hero_badge": "教程入口", "hero_title": "Agent 教程合集", "hero_subtitle": "这里不是单一路线，而是一组围绕 Agent 的系列教程：既讲 Coding Agent 架构拆解，也讲 LangChain 应用实战。", "claude_cta": "进入手搓 Claude Code", "travel_cta": "进入旅行助手", "featured_tutorials": "当前系列", "featured_tutorials_desc": "先把每条路线做清楚，再逐步扩展更多教程。", "course_claude_label": "Claude Code 路线", "course_claude_meta": "章渐进式", "course_claude_title": "从零到一实现 Claude Code 风格 Agent", "course_claude_desc": "按版本拆开循环、工具、规划、压缩、协作和隔离执行。", "course_travel_label": "LangChain 应用路线", "course_travel_meta": "节实战课", "course_travel_title": "构建 LangChain 旅行助手", "course_travel_desc": "把模型接入、天气 API、记忆、多步骤工作流和 Web 应用串成完整实战。", "site_notes_title": "这个站点怎么用", "site_notes_desc": "把它当成一个教程集合入口，而不是某一条路线的介绍页。", "site_note_1_title": "按系列学习", "site_note_1_desc": "每条路线解决一个明确目标，进入后再沿课时顺序推进。", "site_note_2_title": "一边看一边跑", "site_note_2_desc": "Claude Code 路线偏架构拆解，旅行助手路线偏应用落地。", "site_note_3_title": "后续继续扩充", "site_note_3_desc": "首页只负责展示系列入口，细节和深挖都放到各自教程内部。" },
-  "version": { "loc": "行代码", "tools": "个工具", "new": "新增", "prev": "上一版", "next": "下一版", "view_source": "查看源码", "view_diff": "查看变更", "design_decisions": "设计决策", "whats_new": "新增内容", "tutorial": "教程", "simulator": "Agent 循环模拟器", "execution_flow": "执行流程", "architecture": "架构", "concept_viz": "概念可视化", "alternatives": "替代方案", "tab_learn": "学习", "tab_simulate": "模拟", "tab_code": "源码", "tab_deep_dive": "深入探索" },
+  "version": { "loc": "行代码", "tools": "个工具", "new": "新增", "prev": "上一版", "next": "下一版", "view_source": "查看源码", "view_diff": "查看变更", "tutorial": "教程", "simulator": "Agent 循环模拟器", "architecture": "架构", "tab_learn": "学习", "tab_simulate": "模拟", "tab_code": "源码" },
   "sim": { "play": "播放", "pause": "暂停", "step": "单步", "reset": "重置", "speed": "速度", "step_of": "/" },
   "layers": {
     "title": "架构层次",
@@ -38,18 +38,18 @@
     "loc_delta": "代码量差异"
   },
   "sessions": {
-    "s01": "Agent 循环",
-    "s02": "工具",
-    "s03": "TodoWrite",
-    "s04": "子 Agent",
-    "s05": "技能",
-    "s06": "上下文压缩",
-    "s07": "任务系统",
-    "s08": "后台任务",
-    "s09": "Agent 团队",
-    "s10": "团队协议",
-    "s11": "自主 Agent",
-    "s12": "Worktree + 任务隔离"
+    "s01": "第一课：Agent 循环",
+    "s02": "第二课：工具",
+    "s03": "第三课：TodoWrite",
+    "s04": "第四课：子 Agent",
+    "s05": "第五课：技能",
+    "s06": "第六课：上下文压缩",
+    "s07": "第七课：任务系统",
+    "s08": "第八课：后台任务",
+    "s09": "第九课：Agent 团队",
+    "s10": "第十课：团队协议",
+    "s11": "第十一课：自主 Agent",
+    "s12": "第十二课：Worktree + 任务隔离"
   },
   "layer_labels": {
     "tools": "工具与执行",

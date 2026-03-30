@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import {
+  getTravelLessonDisplayTitle,
   getTravelLessonHref,
   travelAssistantTutorial,
 } from "@/data/travel-assistant-tutorial";
@@ -52,11 +53,8 @@ export function TravelSidebar() {
                         ? "bg-zinc-100 font-medium text-zinc-900 dark:bg-zinc-800 dark:text-white"
                         : "text-zinc-500 hover:bg-zinc-50 hover:text-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-800/50 dark:hover:text-zinc-300"
                     )}
-                  >
-                    <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-300">
-                      {section.label}
-                    </span>
-                    <span className="ml-1.5">{section.title}</span>
+                    >
+                    <span>{getTravelLessonDisplayTitle(section)}</span>
                   </Link>
                 </li>
               );

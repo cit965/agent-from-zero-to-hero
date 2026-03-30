@@ -15,6 +15,7 @@ const data = versionData as VersionIndex;
 
 export default function ComparePage() {
   const t = useTranslations("compare");
+  const tSession = useTranslations("sessions");
   const locale = useLocale();
   const [versionA, setVersionA] = useState<string>("");
   const [versionB, setVersionB] = useState<string>("");
@@ -71,7 +72,7 @@ export default function ComparePage() {
             <option value="">-- select --</option>
             {LEARNING_PATH.map((v) => (
               <option key={v} value={v}>
-                {v} - {VERSION_META[v]?.title}
+                {tSession(v) || VERSION_META[v]?.title}
               </option>
             ))}
           </select>
@@ -91,7 +92,7 @@ export default function ComparePage() {
             <option value="">-- select --</option>
             {LEARNING_PATH.map((v) => (
               <option key={v} value={v}>
-                {v} - {VERSION_META[v]?.title}
+                {tSession(v) || VERSION_META[v]?.title}
               </option>
             ))}
           </select>
