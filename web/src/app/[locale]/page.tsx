@@ -29,6 +29,15 @@ export default function HomePage() {
       title: t("course_travel_title"),
       desc: t("course_travel_desc"),
     },
+    {
+      href: `/${locale}/pi`,
+      dotClass: "bg-purple-500",
+      borderClass: "border-purple-500/30 hover:border-purple-500/60",
+      label: t("course_pi_label"),
+      meta: `${LEARNING_PATH.length}${t("course_pi_meta")}`,
+      title: t("course_pi_title"),
+      desc: t("course_pi_desc"),
+    },
   ];
 
   const siteNotes = [
@@ -63,6 +72,12 @@ export default function HomePage() {
             >
               {t("travel_cta")}
             </Link>
+            <Link
+              href={`/${locale}/pi`}
+              className="inline-flex min-h-[44px] items-center rounded-lg border border-purple-300/60 px-5 py-2.5 text-sm font-medium text-purple-800 transition-colors hover:bg-purple-50 dark:border-purple-700/50 dark:text-purple-200 dark:hover:bg-purple-900/20"
+            >
+              {t("pi_cta")}
+            </Link>
           </div>
         </div>
       </section>
@@ -76,7 +91,7 @@ export default function HomePage() {
             {t("featured_tutorials_desc")}
           </p>
         </div>
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
           {seriesCards.map((card) => (
             <Link key={card.href} href={card.href} className="group block">
               <Card className={`h-full transition-all duration-200 ${card.borderClass}`}>

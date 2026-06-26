@@ -1,7 +1,25 @@
 {
   "meta": { "title": "Agent 从小白到架构师", "description": "从 0 到 1 构建 nano Claude Code-like agent，每次只加一个机制" },
-  "nav": { "home": "首页", "travel": "LangChain旅行助手", "timeline": "手搓 Claude Code", "compare": "版本对比", "github": "GitHub" },
-  "home": { "hero_badge": "教程入口", "hero_title": "Agent 教程合集", "hero_subtitle": "这里不是单一路线，而是一组围绕 Agent 的系列教程：既讲 Coding Agent 架构拆解，也讲 LangChain 应用实战。", "claude_cta": "进入手搓 Claude Code", "travel_cta": "进入旅行助手", "featured_tutorials": "当前系列", "featured_tutorials_desc": "先把每条路线做清楚，再逐步扩展更多教程。", "course_claude_label": "Claude Code 路线", "course_claude_meta": "章渐进式", "course_claude_title": "从零到一实现 Claude Code 风格 Agent", "course_claude_desc": "按版本拆开循环、工具、规划、压缩、协作和隔离执行。", "course_travel_label": "LangChain 应用路线", "course_travel_meta": "节实战课", "course_travel_title": "构建 LangChain 旅行助手", "course_travel_desc": "把模型接入、天气 API、记忆、多步骤工作流和 Web 应用串成完整实战。", "site_notes_title": "这个站点怎么用", "site_notes_desc": "把它当成一个教程集合入口，而不是某一条路线的介绍页。", "site_note_1_title": "按系列学习", "site_note_1_desc": "每条路线解决一个明确目标，进入后再沿课时顺序推进。", "site_note_2_title": "一边看一边跑", "site_note_2_desc": "Claude Code 路线偏架构拆解，旅行助手路线偏应用落地。", "site_note_3_title": "后续继续扩充", "site_note_3_desc": "首页只负责展示系列入口，细节和深挖都放到各自教程内部。" },
+  "nav": { "home": "首页", "travel": "LangChain旅行助手", "timeline": "手搓 Claude Code", "compare": "版本对比", "github": "GitHub", "pi": "pi 对照" },
+  "home": { "hero_badge": "教程入口", "hero_title": "Agent 教程合集", "hero_subtitle": "这里不是单一路线，而是一组围绕 Agent 的系列教程：既讲 Coding Agent 架构拆解，也讲 LangChain 应用实战。", "claude_cta": "进入手搓 Claude Code", "travel_cta": "进入旅行助手", "pi_cta": "查看 pi 实现对照", "featured_tutorials": "当前系列", "featured_tutorials_desc": "先把每条路线做清楚，再逐步扩展更多教程。", "course_claude_label": "Claude Code 路线", "course_claude_meta": "章渐进式", "course_claude_title": "从零到一实现 Claude Code 风格 Agent", "course_claude_desc": "按版本拆开循环、工具、规划、压缩、协作和隔离执行。", "course_travel_label": "LangChain 应用路线", "course_travel_meta": "节实战课", "course_travel_title": "构建 LangChain 旅行助手", "course_travel_desc": "把模型接入、天气 API、记忆、多步骤工作流和 Web 应用串成完整实战。", "course_pi_label": "pi 实现对照", "course_pi_meta": "章交叉映射", "course_pi_title": "12 课 × pi 代码库映射", "course_pi_desc": "把每节课的核心机制对应到 pi 仓库的真实文件与代码片段：已实现 / 部分实现 / 未实现 / 不同范式。", "site_notes_title": "这个站点怎么用", "site_notes_desc": "把它当成一个教程集合入口，而不是某一条路线的介绍页。", "site_note_1_title": "按系列学习", "site_note_1_desc": "每条路线解决一个明确目标，进入后再沿课时顺序推进。", "site_note_2_title": "一边看一边跑", "site_note_2_desc": "Claude Code 路线偏架构拆解，旅行助手路线偏应用落地。", "site_note_3_title": "后续继续扩充", "site_note_3_desc": "首页只负责展示系列入口，细节和深挖都放到各自教程内部。" },
+  "pi": {
+    "hero_badge": "实现对照",
+    "hero_title": "12 课 × pi 代码库映射",
+    "hero_subtitle": "把 12 节渐进式课程的核心机制，与 pi 真实代码库里的实现一一对照：哪些已经落地、哪些只完成一半、哪些走的是另一条路。",
+    "tab_pi": "Pi 对照",
+    "status_implemented": "已实现",
+    "status_partial": "部分实现",
+    "status_not_implemented": "未实现",
+    "status_different": "不同范式",
+    "stat_implemented": "已实现",
+    "stat_partial": "部分实现",
+    "stat_missing": "未实现 / 不同范式",
+    "card_files": "对应文件",
+    "card_divergence": "差异说明",
+    "card_key_insight": "核心洞察",
+    "card_demos": "相关演示",
+    "view_full_mapping": "查看完整 12 课对照 →"
+  },
   "version": { "loc": "行代码", "tools": "个工具", "new": "新增", "prev": "上一版", "next": "下一版", "view_source": "查看源码", "view_diff": "查看变更", "tutorial": "教程", "simulator": "Agent 循环模拟器", "architecture": "架构", "tab_learn": "学习", "tab_simulate": "模拟", "tab_code": "源码" },
   "sim": { "play": "播放", "pause": "暂停", "step": "单步", "reset": "重置", "speed": "速度", "step_of": "/" },
   "compare": {
